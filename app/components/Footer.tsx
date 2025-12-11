@@ -1,47 +1,15 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Twitter, Send, MessageCircle, FileText, ExternalLink, Github, Copy, Check, Plus } from 'lucide-react';
 import { HOLMES_ADDRESS } from '@/lib/wagmi';
+import { useAddTokenToWallet, useCopyToClipboard } from '@/lib/hooks';
 
 export default function Footer() {
-  const [copied, setCopied] = useState(false);
-  const [addedToWallet, setAddedToWallet] = useState(false);
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(HOLMES_ADDRESS);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const addToMetaMask = async () => {
-    if (typeof window === 'undefined' || !window.ethereum) {
-      alert('Please install MetaMask to add the token');
-      return;
-    }
-
-    try {
-      await window.ethereum.request({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20',
-          options: {
-            address: HOLMES_ADDRESS,
-            symbol: 'HOLMES',
-            decimals: 18,
-            image: 'https://holmes.free/elizabeth-holmes.jpg',
-          },
-        },
-      });
-      setAddedToWallet(true);
-      setTimeout(() => setAddedToWallet(false), 2000);
-    } catch (error) {
-      console.error('Failed to add token to wallet:', error);
-    }
-  };
+  const { copyToClipboard, copied } = useCopyToClipboard();
+  const { addToMetaMask, addedToWallet } = useAddTokenToWallet();
 
   const navLinks = [
     { href: '#about', label: 'The Story' },
@@ -135,7 +103,7 @@ export default function Footer() {
               {HOLMES_ADDRESS}
             </code>
             <Button
-              onClick={copyToClipboard}
+              onClick={() => copyToClipboard(HOLMES_ADDRESS, 'Contract address copied!')}
               size="icon"
               variant="ghost"
               className="shrink-0 hover:bg-amber-500/20"

@@ -1,15 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAccount, useConnect, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useAccount, useConnect, useWriteContract, useReadContract, useWaitForTransactionReceipt, useSwitchChain, useChainId } from 'wagmi';
+import { base } from 'wagmi/chains';
 import { Button } from '@/components/ui/button';
 import { HOLMES_ADDRESS, HOLMES_ABI } from '@/lib/wagmi';
-import { Sparkles, Loader2, Check, Wallet, AlertCircle } from 'lucide-react';
+import { Sparkles, Loader2, Check, Wallet, AlertCircle, ExternalLink } from 'lucide-react';
 import { formatUnits } from 'viem';
 
 export default function MintButton({ size = 'default' }: { size?: 'default' | 'giant' }) {
   const { address, isConnected } = useAccount();
   const { connect, connectors } = useConnect();
+  const chainId = useChainId();
+  const { switchChain } = useSwitchChain();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -89,6 +92,23 @@ export default function MintButton({ size = 'default' }: { size?: 'default' | 'g
     );
   }
 
+  // Wrong network - need to switch to Base
+  if (chainId !== base.id) {
+    return (
+      <Button
+        size="lg"
+        onClick={() => switchChain({ chainId: base.id })}
+        className={size === 'giant'
+          ? "h-20 px-16 text-2xl font-black bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 border-0 glow-sm hover:glow-md transition-all"
+          : "h-14 px-10 text-base font-semibold bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 border-0 glow-sm hover:glow-md transition-all"
+        }
+      >
+        <AlertCircle className={size === 'giant' ? "w-8 h-8 mr-3" : "w-5 h-5 mr-2"} />
+        Switch to Base
+      </Button>
+    );
+  }
+
   // Already minted
   if (hasMinted) {
     const formattedBalance = balance ? formatUnits(balance, 18) : '0';
@@ -130,7 +150,7 @@ export default function MintButton({ size = 'default' }: { size?: 'default' | 'g
   }
 
   // Success
-  if (isSuccess) {
+  if (isSuccess && hash) {
     return (
       <div className="text-center">
         <Button
@@ -147,6 +167,15 @@ export default function MintButton({ size = 'default' }: { size?: 'default' | 'g
         <p className="mt-4 text-muted-foreground">
           You now have 1,000 HOLMES tokens!
         </p>
+        <a
+          href={`https://basescan.org/tx/${hash}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 mt-2 text-sm text-amber-400 hover:text-amber-300 transition-colors"
+        >
+          View transaction on Basescan
+          <ExternalLink className="w-3 h-3" />
+        </a>
       </div>
     );
   }

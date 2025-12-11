@@ -1,52 +1,20 @@
 'use client';
 
-import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Copy, Feather, Heart, Scale, ExternalLink, Plus, Wallet } from 'lucide-react';
 import { HOLMES_ADDRESS } from '@/lib/wagmi';
+import { useAddTokenToWallet, useCopyToClipboard } from '@/lib/hooks';
 
 // Dynamic import to avoid SSR issues with the mint coin
 const MintCoin = dynamic(() => import('./MintCoin'), { ssr: false });
 
 export default function Hero() {
-  const [copied, setCopied] = useState(false);
-  const [addedToWallet, setAddedToWallet] = useState(false);
+  const { copyToClipboard, copied } = useCopyToClipboard();
+  const { addToMetaMask, addedToWallet } = useAddTokenToWallet();
   const contractAddress = HOLMES_ADDRESS;
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(contractAddress);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const addToMetaMask = async () => {
-    if (typeof window === 'undefined' || !window.ethereum) {
-      alert('Please install MetaMask to add the token');
-      return;
-    }
-
-    try {
-      await window.ethereum.request({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20',
-          options: {
-            address: contractAddress,
-            symbol: 'HOLMES',
-            decimals: 18,
-            image: 'https://holmes.free/elizabeth-holmes.jpg',
-          },
-        },
-      });
-      setAddedToWallet(true);
-      setTimeout(() => setAddedToWallet(false), 2000);
-    } catch (error) {
-      console.error('Failed to add token to wallet:', error);
-    }
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-32 pb-24 overflow-hidden">
@@ -153,7 +121,7 @@ export default function Hero() {
                   {contractAddress}
                 </code>
                 <Button
-                  onClick={copyToClipboard}
+                  onClick={() => copyToClipboard(contractAddress, 'Contract address copied!')}
                   size="icon"
                   variant="outline"
                   className="shrink-0 border-amber-500/40 hover:bg-amber-500/20"
