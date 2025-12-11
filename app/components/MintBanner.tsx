@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, createContext, useContext } from 'react';
-import { useReadContract } from 'wagmi';
+import { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { X, Sparkles, Users, TrendingUp } from 'lucide-react';
-import { HOLMES_ADDRESS, HOLMES_ABI, MAX_MINTS } from '@/lib/wagmi';
+import { MAX_MINTS } from '@/lib/wagmi';
 
 const BANNER_DISMISSED_KEY = 'holmes-banner-dismissed';
 const BANNER_HEIGHT = 44; // px - keep in sync with actual banner height
@@ -39,12 +38,56 @@ export function BannerProvider({ children }: { children: React.ReactNode }) {
 export default function MintBanner() {
   const [mounted, setMounted] = useState(false);
   const [dismissed, setDismissed] = useState(true);
+  const [mintCount, setMintCount] = useState(0);
+  const [displayCount, setDisplayCount] = useState(0);
+  const animationRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { data: mintCount } = useReadContract({
-    address: HOLMES_ADDRESS,
-    abi: HOLMES_ABI,
-    functionName: 'mintCount',
-  });
+  // Fetch live stats and poll every 3 seconds
+  useEffect(() => {
+    const fetchMintCount = async () => {
+      try {
+        const { fetchMinterCount } = await import('@/lib/api');
+        const count = await fetchMinterCount();
+        setMintCount(count);
+      } catch (error) {
+        console.error('Error fetching mint count:', error);
+      }
+    };
+
+    fetchMintCount();
+    const interval = setInterval(fetchMintCount, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Animate the count when it changes
+  useEffect(() => {
+    if (displayCount === mintCount) return;
+
+    // Clear any existing animation
+    if (animationRef.current) {
+      clearTimeout(animationRef.current);
+    }
+
+    // Animate towards the new count
+    const diff = mintCount - displayCount;
+    const step = Math.max(1, Math.ceil(Math.abs(diff) / 20));
+
+    const animate = () => {
+      setDisplayCount(prev => {
+        if (prev < mintCount) {
+          return Math.min(prev + step, mintCount);
+        } else if (prev > mintCount) {
+          return Math.max(prev - step, mintCount);
+        }
+        return prev;
+      });
+    };
+
+    animationRef.current = setTimeout(animate, 50);
+    return () => {
+      if (animationRef.current) clearTimeout(animationRef.current);
+    };
+  }, [mintCount, displayCount]);
 
   useEffect(() => {
     setMounted(true);
@@ -63,7 +106,7 @@ export default function MintBanner() {
 
   if (!mounted || dismissed) return null;
 
-  const currentMints = mintCount ? Number(mintCount) : 0;
+  const currentMints = displayCount;
   const mintsRemaining = MAX_MINTS - currentMints;
   const progressPercent = (currentMints / MAX_MINTS) * 100;
 
