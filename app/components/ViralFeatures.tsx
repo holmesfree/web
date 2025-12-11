@@ -248,7 +248,7 @@ export default function ViralFeatures() {
             &ldquo;In a world that loves a comeback story, let&apos;s write one together.&rdquo;
           </p>
           <div className="flex justify-center">
-            <MintButton size="large" />
+            <MintButton size="giant" />
           </div>
         </div>
       </div>
