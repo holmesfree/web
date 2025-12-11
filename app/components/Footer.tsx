@@ -53,14 +53,14 @@ export default function Footer() {
   const resourceLinks = [
     { href: '/holmes-whitepaper.pdf', label: 'Manifesto' },
     { href: `https://basescan.org/token/${HOLMES_ADDRESS}`, label: 'Basescan' },
-    { href: 'https://github.com/free-holmes', label: 'GitHub' },
+    { href: 'https://github.com/holmesfree', label: 'GitHub' },
   ];
 
   const socialLinks = [
     { href: 'https://twitter.com/FreeHolmesToken', icon: Twitter, label: 'Twitter' },
     { href: 'https://t.me/FreeHolmesCommunity', icon: Send, label: 'Telegram' },
     { href: 'https://discord.gg/freeholmes', icon: MessageCircle, label: 'Discord' },
-    { href: 'https://github.com/free-holmes', icon: Github, label: 'GitHub' },
+    { href: 'https://github.com/holmesfree', icon: Github, label: 'GitHub' },
   ];
 
   return (

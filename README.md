@@ -61,8 +61,7 @@ Typography combines sans-serif for readability with Playfair Display for poetic 
 
 ## Links
 
-- Token: https://github.com/free-holmes/token
-- Whitepaper: https://github.com/free-holmes/whitepaper
+- GitHub: https://github.com/holmesfree
 - Website: https://holmes.free
 
 ---
