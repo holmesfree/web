@@ -4,6 +4,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Wallet, Globe, Gift, Sparkles, ExternalLink, Heart } from 'lucide-react';
+import MintButton from './MintButton';
+import { HOLMES_ADDRESS } from '@/lib/wagmi';
 
 export default function HowToMint() {
   const steps = [
@@ -23,7 +25,7 @@ export default function HowToMint() {
       icon: Gift,
       number: 3,
       title: 'Free Mint',
-      description: 'Visit our mint page and claim your 1,000 HOLMES tokens. Just pay gas.',
+      description: 'Click the button below to claim your 1,000 HOLMES tokens. Just pay gas.',
     },
     {
       icon: Sparkles,
@@ -54,6 +56,22 @@ export default function HowToMint() {
           <p className="text-xl text-muted-foreground leading-relaxed">
             Four simple steps to join the movement for a second chance.
           </p>
+        </div>
+
+        {/* Giant Mint Button */}
+        <div className="max-w-4xl mx-auto mb-20">
+          <Card className="border-2 border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-orange-500/5 backdrop-blur-sm">
+            <CardContent className="p-12 text-center">
+              <h3 className="text-3xl font-black text-foreground mb-4">
+                Free Mint: 1,000 HOLMES
+              </h3>
+              <p className="text-lg text-muted-foreground mb-8 max-w-lg mx-auto">
+                Every wallet can mint 1,000 HOLMES tokens for free (just gas).
+                One mint per address—because everyone deserves exactly one second chance.
+              </p>
+              <MintButton size="giant" />
+            </CardContent>
+          </Card>
         </div>
 
         {/* Steps */}
@@ -92,7 +110,7 @@ export default function HowToMint() {
             <CardContent className="p-8 text-center">
               <p className="text-sm text-muted-foreground mb-4">Contract Address (Base)</p>
               <code className="block text-base font-mono text-primary bg-secondary/30 px-6 py-4 rounded-xl break-all mb-4">
-                Coming Soon - Contract Not Yet Deployed
+                {HOLMES_ADDRESS}
               </code>
               <p className="text-xs text-muted-foreground">Always verify before minting</p>
             </CardContent>
@@ -100,15 +118,10 @@ export default function HowToMint() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="h-14 px-10 text-base font-semibold bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 border-0 glow-sm">
-              <a href="#" onClick={(e) => { e.preventDefault(); alert('Mint coming soon!'); }}>
-                <Gift className="w-5 h-5 mr-2" />
-                Free Mint HOLMES
-              </a>
-            </Button>
+            <MintButton />
             <Button asChild variant="outline" size="lg" className="h-14 px-10 text-base font-semibold">
               <a
-                href="https://basescan.org"
+                href={`https://basescan.org/address/${HOLMES_ADDRESS}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Copy, Feather, Heart, Scale, Sparkles, ExternalLink } from 'lucide-react';
+import MintButton from './MintButton';
 
 // Dynamic import to avoid SSR issues with the spinning coin
 const SpinningCoin = dynamic(() => import('./SpinningCoin'), { ssr: false });
@@ -99,12 +100,7 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in delay-400">
-            <Button asChild size="lg" className="h-14 px-10 text-base font-semibold bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 border-0 glow-sm hover:glow-md transition-all">
-              <a href="#how-to-mint">
-                <Sparkles className="w-5 h-5 mr-2" />
-                Free Mint HOLMES
-              </a>
-            </Button>
+            <MintButton />
             <Button asChild variant="outline" size="lg" className="h-14 px-10 text-base font-semibold">
               <a
                 href="/holmes-whitepaper.pdf"

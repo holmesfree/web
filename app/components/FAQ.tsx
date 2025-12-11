@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     question: "What's the total supply?",
-    answer: "1 billion HOLMES tokens. 70% free mint, 10% liquidity, 10% community treasury, 5% team (2-year vest), 5% marketing."
+    answer: "1 billion HOLMES tokens. 70% free mint, 10% liquidity, 10% Freedom Treasury, 5% team (2-year vest), 5% marketing."
   },
   {
     question: "Can I mint more than once?",
