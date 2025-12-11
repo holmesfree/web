@@ -12,7 +12,7 @@ const SpinningCoin = dynamic(() => import('./SpinningCoin'), { ssr: false });
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
-  const contractAddress = '0x0000000000000000000000000000000000000000'; // TBD after deployment
+  const contractAddress = '0xA7de8462a852eBA2C9b4A3464C8fC577cb7090b8'; // HOLMES token on Base
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(contractAddress);
@@ -124,9 +124,9 @@ export default function Hero() {
                 <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Contract Address (Base)
                 </span>
-                <Badge variant="outline" className="bg-amber-500/10 text-amber-400 border-amber-500/20">
-                  <Sparkles className="w-3 h-3 mr-1" />
-                  Coming Soon
+                <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20">
+                  <Check className="w-3 h-3 mr-1" />
+                  Live on Base
                 </Badge>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-xl bg-background/50 border border-border/30">
