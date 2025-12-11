@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, Copy, Feather, Heart, Scale, ExternalLink, Plus, Wallet, TrendingUp, BarChart3 } from 'lucide-react';
+import { Check, Copy, Feather, Heart, Scale, ExternalLink, Plus, Wallet, TrendingUp, BarChart3, Search } from 'lucide-react';
 import { HOLMES_ADDRESS, TRADING_LINKS } from '@/lib/wagmi';
 import { useAddTokenToWallet, useCopyToClipboard } from '@/lib/hooks';
 
@@ -100,6 +100,16 @@ export default function Hero() {
               >
                 Read the Manifesto
                 <ExternalLink className="w-4 h-4 ml-2" />
+              </a>
+            </Button>
+            <Button asChild size="lg" className="h-14 px-10 text-base font-semibold bg-[#20808D] hover:bg-[#1a6b76]">
+              <a
+                href="https://www.perplexity.ai/search?q=Elizabeth+Holmes+pardon+case+should+she+be+freed+mother+children"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Search className="w-4 h-4 mr-2" />
+                Learn the Truth
               </a>
             </Button>
           </div>

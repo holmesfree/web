@@ -1,11 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, KeyboardEvent } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
-const faqs = [
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FAQItem[] = [
   {
     question: "What is HOLMES token?",
     answer: "HOLMES is a free mint community token and cultural movement calling for the pardon of Elizabeth Holmes. It's a statement about redemption, second chances, and the belief that people can change."
@@ -51,18 +56,29 @@ const faqs = [
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  const toggleFAQ = useCallback((index: number) => {
+    setOpenIndex(current => current === index ? null : index);
+  }, []);
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleFAQ(index);
+    }
+  };
+
   return (
-    <section id="faq" className="py-24 sm:py-32 relative">
+    <section id="faq" className="py-24 sm:py-32 relative" aria-labelledby="faq-heading">
       <div className="container mx-auto px-6 sm:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-6">
             <Badge variant="outline" className="px-4 py-2 border-primary/20 bg-primary/5">
-              <HelpCircle className="w-4 h-4 mr-2 text-primary" />
+              <HelpCircle className="w-4 h-4 mr-2 text-primary" aria-hidden="true" />
               Questions
             </Badge>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6">
+          <h2 id="faq-heading" className="text-3xl sm:text-4xl md:text-5xl font-black mb-6">
             Frequently Asked <span className="gradient-text">Questions</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -70,33 +86,51 @@ export default function FAQ() {
           </p>
         </div>
 
-        {/* FAQ Items */}
-        <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, index) => (
-            <Card
-              key={index}
-              className={`border-border/30 bg-card/30 backdrop-blur-sm transition-all cursor-pointer ${
-                openIndex === index ? 'border-primary/30' : ''
-              }`}
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            >
-              <CardContent className="p-0">
-                <div className="flex items-center justify-between p-5">
-                  <h3 className="font-semibold text-foreground pr-4">{faq.question}</h3>
-                  {openIndex === index ? (
-                    <ChevronUp className="w-5 h-5 text-primary shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-muted-foreground shrink-0" />
+        {/* FAQ Items with proper accessibility */}
+        <div className="max-w-3xl mx-auto space-y-4" role="list">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            const headerId = `faq-header-${index}`;
+            const panelId = `faq-panel-${index}`;
+
+            return (
+              <Card
+                key={`faq-${index}`}
+                className={`border-border/30 bg-card/30 backdrop-blur-sm transition-all ${
+                  isOpen ? 'border-primary/30' : ''
+                }`}
+                role="listitem"
+              >
+                <CardContent className="p-0">
+                  <button
+                    id={headerId}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => toggleFAQ(index)}
+                    onKeyDown={(e) => handleKeyDown(e, index)}
+                    className="w-full flex items-center justify-between p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg transition-colors hover:bg-accent/30"
+                  >
+                    <h3 className="font-semibold text-foreground pr-4">{faq.question}</h3>
+                    {isOpen ? (
+                      <ChevronUp className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-muted-foreground shrink-0" aria-hidden="true" />
+                    )}
+                  </button>
+                  {isOpen && (
+                    <div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={headerId}
+                      className="px-5 pb-5 pt-0"
+                    >
+                      <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                    </div>
                   )}
-                </div>
-                {openIndex === index && (
-                  <div className="px-5 pb-5 pt-0">
-                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

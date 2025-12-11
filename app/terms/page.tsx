@@ -32,6 +32,21 @@ export default function TermsPage() {
             </p>
           </section>
 
+          <section className="p-6 border-2 border-red-500/50 rounded-lg bg-red-500/5">
+            <h2 className="text-2xl font-bold mb-4 text-red-400">CRITICAL FINANCIAL DISCLAIMER</h2>
+            <p className="text-muted-foreground leading-relaxed mb-4 font-semibold">
+              READ THIS CAREFULLY BEFORE PARTICIPATING:
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-2">
+              <li><strong>YOU MAY LOSE ALL YOUR MONEY.</strong> Assume any funds spent on or exchanged for HOLMES tokens may be lost entirely.</li>
+              <li><strong>THIS IS NOT A SECURITY.</strong> HOLMES does not represent an investment contract, security, or financial instrument under any jurisdiction&apos;s laws.</li>
+              <li><strong>NO EXPECTATION OF PROFIT.</strong> Do not purchase or hold HOLMES with the expectation of profit from the efforts of others.</li>
+              <li><strong>NO TEAM, NO PROMISES.</strong> There is no formal team, company, or entity behind HOLMES. There are no promises of development, utility, or future value.</li>
+              <li><strong>EXTREME VOLATILITY.</strong> Meme tokens can lose 99%+ of their value in minutes. This is normal for this asset class.</li>
+              <li><strong>LIQUIDITY RISK.</strong> You may not be able to sell your tokens at any price.</li>
+            </ul>
+          </section>
+
           <section>
             <h2 className="text-2xl font-bold mb-4">2. Nature of HOLMES Token</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
@@ -46,6 +61,22 @@ export default function TermsPage() {
               <li>The value of HOLMES may fluctuate dramatically and unpredictably</li>
               <li>You may lose the entire value of any funds used to acquire HOLMES</li>
             </ul>
+          </section>
+
+          <section className="p-6 border border-amber-500/50 rounded-lg bg-amber-500/5">
+            <h2 className="text-2xl font-bold mb-4 text-amber-400">Position on Elizabeth Holmes&apos; Actions</h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              <strong>The HOLMES community does not condone, excuse, or minimize fraud, deception, or any criminal activity.</strong>
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Elizabeth Holmes was convicted of wire fraud in a court of law. The evidence presented at trial
+              established that investors were misled about Theranos technology. These facts are not disputed by this movement.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Our position is that she has been held accountable, is serving her sentence, and that the principles of
+              rehabilitation, redemption, and mercy are also important components of a just society. We believe in
+              justice AND compassion—not one at the expense of the other.
+            </p>
           </section>
 
           <section>

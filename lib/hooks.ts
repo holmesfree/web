@@ -47,11 +47,24 @@ export function useAddTokenToWallet() {
 export function useCopyToClipboard() {
   const [copied, setCopied] = useState(false);
 
-  const copyToClipboard = (text: string, successMessage = 'Copied to clipboard!') => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    toast.success(successMessage);
-    setTimeout(() => setCopied(false), 2000);
+  const copyToClipboard = async (text: string, successMessage = 'Copied to clipboard!') => {
+    try {
+      if (!navigator.clipboard) {
+        toast.error('Clipboard not available', {
+          description: 'Please copy manually',
+        });
+        return;
+      }
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      toast.success(successMessage);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy:', error);
+      toast.error('Failed to copy', {
+        description: 'Please try again',
+      });
+    }
   };
 
   return { copyToClipboard, copied };

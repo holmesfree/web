@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Twitter, Send, MessageCircle, FileText, ExternalLink, Github, Copy, Check, Plus } from 'lucide-react';
+import { Twitter, Send, MessageCircle, FileText, ExternalLink, Github, Copy, Check, Plus, ArrowUpRight } from 'lucide-react';
 import { HOLMES_ADDRESS } from '@/lib/wagmi';
 import { useAddTokenToWallet, useCopyToClipboard } from '@/lib/hooks';
 
@@ -148,6 +148,21 @@ export default function Footer() {
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
                 View on Basescan
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="flex-1 border-amber-500/40 hover:bg-amber-500/20"
+            >
+              <a
+                href={`https://app.uniswap.org/swap?inputCurrency=ETH&outputCurrency=${HOLMES_ADDRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ArrowUpRight className="w-4 h-4 mr-2" />
+                Trade on Uniswap
               </a>
             </Button>
           </div>

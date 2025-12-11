@@ -9,6 +9,7 @@ import Tokenomics from './components/Tokenomics';
 import Trade from './components/Trade';
 import HowToMint from './components/HowToMint';
 import News from './components/News';
+import PressKit from './components/PressKit';
 import ViralFeatures from './components/ViralFeatures';
 import FAQ from './components/FAQ';
 import Roadmap from './components/Roadmap';
@@ -26,6 +27,7 @@ export default function Home() {
       <Trade />
       <HowToMint />
       <News />
+      <PressKit />
       <ViralFeatures />
       <FAQ />
       <Roadmap />

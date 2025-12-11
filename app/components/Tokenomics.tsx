@@ -3,6 +3,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { PieChart, Coins, AlertTriangle, Gift } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Tokenomics() {
   const tokenomicsData = [
@@ -49,7 +50,11 @@ export default function Tokenomics() {
                 <Gift className="w-10 h-10 text-amber-400" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">Free Mint: 1,000 HOLMES</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-2">
+                  <Link href="#how-to-mint" className="hover:text-amber-400 transition-colors">
+                    Free Mint: 1,000 HOLMES
+                  </Link>
+                </h3>
                 <p className="text-muted-foreground">
                   Every wallet can mint 1,000 HOLMES tokens for free (just gas). One mint per address—because everyone deserves exactly one second chance.
                 </p>

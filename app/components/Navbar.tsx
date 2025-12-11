@@ -76,10 +76,10 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '#about', label: 'Story' },
+    { href: '#gallery', label: 'Timeline' },
     { href: '#tokenomics', label: 'Token' },
-    { href: '#trade', label: 'Trade' },
     { href: '#how-to-mint', label: 'Mint' },
-    { href: '#news', label: 'News' },
+    { href: '#press', label: 'Press' },
     { href: '#faq', label: 'FAQ' },
   ];
 
@@ -119,20 +119,30 @@ export default function Navbar() {
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </Button>
+            {/* Mobile: Always visible mint button + Menu Button */}
+            <div className="lg:hidden flex items-center gap-2">
+              <Button
+                onClick={handleWalletAction}
+                size="sm"
+                className="bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 border-0"
+              >
+                {buttonContent.icon}
+                <span className="hidden xs:inline">{buttonContent.text}</span>
+                <span className="xs:hidden">{hasMinted ? buttonContent.text.slice(0, 6) : 'Mint'}</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </nav>
