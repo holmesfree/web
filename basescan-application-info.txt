@@ -1,0 +1,149 @@
+HOLMES TOKEN BASESCAN APPLICATION INFORMATION
+==============================================
+
+Last Updated: December 11, 2025
+
+BASE INFORMATION
+================
+Token Contract Address: 0xA7de8462a852eBA2C9b4A3464C8fC577cb7090b8
+Chain: Base
+Token Standard: ERC-20
+Total Supply: 1,000,000,000 HOLMES
+
+TOKEN LOGO INFORMATION
+=======================
+Local File Path: public/holmes-logo-32x32.svg
+Direct URL: https://holmes.free/holmes-logo-32x32.svg
+
+Note: The logo file exists locally but may not be deployed yet. 
+If the URL 404s, you need to deploy the site first or use an alternative approach.
+
+Alternative Logo Options:
+1. Use existing favicon (if available)
+2. Upload the SVG file to IPFS and use that URL
+3. Use a free image hosting service temporarily
+
+BASESCAN APPLICATION FORM ANSWERS
+==================================
+
+Request Type:
+- Token Update Application
+
+Basic Information:
+- Token Contract Address: 0xA7de8462a852eBA2C9b4A3464C8fC577cb7090b8
+- Requester Name: HOLMES Team
+- Requester Email Address: contact@holmes.free
+- Project Name: HOLMES
+- Official Project Website: https://holmes.free
+- Official Project Email Address: contact@holmes.free
+- Link to download a 32x32 svg icon logo: https://holmes.free/holmes-logo-32x32.svg
+- Project Sector: Community/Meme Token, Social Movement
+
+Project Description (Max 300 characters):
+"A community meme token supporting the pardon of Elizabeth Holmes. Everyone deserves a second chance. Fair launch, free mint, no presale. Cultural movement for redemption and justice reform."
+
+Social Profiles:
+- Twitter/X: https://twitter.com/FreeHolmesToken
+- Telegram: https://t.me/FreeHolmesCommunity
+- Discord: https://discord.gg/freeholmes
+- GitHub: https://github.com/holmesfree
+
+Price Data:
+- CoinMarketCap Ticker: (Leave blank if not listed)
+- CoinGecko Ticker: (Leave blank if not listed)
+
+Token Sale Details:
+Public Sale (ICO/IEO) Details:
+1. Token Sale Address: N/A (Free mint, no public sale)
+2. Token Sale Start Date: N/A
+3. Token Sale End Date: N/A
+4. Token Price: Free (just gas)
+5. Public Sale Allocation: 90% (900M tokens)
+6. Public Sale Vesting Period: None
+7. IEO Launchpad: N/A
+8. Country: N/A
+9. Soft Cap / Hard Cap: N/A
+10. Amount Raised: N/A
+11. Token Distribution Date: Ongoing
+
+Private Sale Details:
+1. Private Sale Token Price: N/A
+2. Private Sale Allocation: N/A
+3. Private Sale Vesting Period: N/A
+4. Seed Sale Token Price: N/A
+5. Seed Sale Allocation: N/A
+6. Seed Sale Vesting Period: N/A
+
+Burn Events:
+1. Announcements Link: N/A
+   Tx Hash: N/A
+
+2. Announcements Link: N/A
+   Tx Hash: N/A
+
+3. Announcements Link: N/A
+   Tx Hash: N/A
+
+TOKENOMICS DETAILS
+==================
+- Total Supply: 1,000,000,000 HOLMES
+- Free Mint: 90% (900M tokens) - 1,000 HOLMES per wallet
+- Initial Liquidity: 10% (100M tokens)
+- Chain: Base
+- Standard: ERC-20
+- Mint Price: Free (just gas fees)
+- Mint Limit: 1 per address
+
+KEY FEATURES
+============
+- Free mint (just pay gas)
+- One mint per address
+- No team allocation
+- Community-driven movement
+- Fair launch, no presale
+- Supporting pardon for Elizabeth Holmes
+- Advocating for second chances
+- Criminal justice reform awareness
+
+PROJECT LINKS
+=============
+Website: https://holmes.free
+Whitepaper/Manifesto: https://holmes.free/holmes-whitepaper.pdf
+FAQ Section: https://holmes.free/#faq
+GitHub: https://github.com/holmesfree
+
+VERIFIED CONTRACT INFORMATION
+=============================
+Contract Address: 0xA7de8462a852eBA2C9b4A3464C8fC577cb7090b8
+Uniswap Pool: 0xcA6C4C0743C9ed9425FF94f7BC3297C3AAFB44B8
+WETH on Base: 0x4200000000000000000000000000000000000006
+
+TRADING LINKS
+=============
+Uniswap: https://app.uniswap.org/swap?outputCurrency=0xA7de8462a852eBA2C9b4A3464C8fC577cb7090b8&chain=base
+DexScreener: https://dexscreener.com/base/0xcA6C4C0743C9ed9425FF94f7BC3297C3AAFB44B8
+DexTools: https://www.dextools.io/app/en/base/pair-explorer/0xcA6C4C0743C9ed9425FF94f7BC3297C3AAFB44B8
+BaseScan: https://basescan.org/token/0xA7de8462a852eBA2C9b4A3464C8fC577cb7090b8
+
+IMPORTANT NOTES
+===============
+1. The logo file exists locally but may not be deployed yet
+2. If the logo URL 404s, deploy the site or use an alternative hosting method
+3. All project links (FAQ, whitepaper) are working and properly configured
+4. The whitepaper is available at: https://holmes.free/holmes-whitepaper.pdf
+5. FAQ section is available at: https://holmes.free/#faq
+
+DEPLOYMENT INSTRUCTIONS
+=======================
+To make the logo URL work:
+1. Deploy the updated site to your hosting provider
+2. Or upload the SVG file to IPFS: https://ipfs.io/
+3. Or use a temporary image hosting service
+
+The SVG logo content is:
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" fill="#F59E0B"/>
+  <text x="16" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">H</text>
+</svg>
+
+You can copy this SVG code and upload it anywhere if needed.

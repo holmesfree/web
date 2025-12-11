@@ -1,0 +1,68 @@
+HOLMES TOKEN LOGO SOLUTIONS
+===========================
+
+PROBLEM IDENTIFIED:
+- Current favicon is using elizabeth-holmes.jpg (not ideal for token logo)
+- The SVG logo file exists locally but hasn't been deployed yet
+- URL https://holmes.free/holmes-logo-32x32.svg returns 404
+
+SOLUTION OPTIONS:
+==================
+
+OPTION 1: Deploy the Site (Recommended)
+---------------------------------------
+1. Deploy your updated site to your hosting provider
+2. The SVG logo will then be available at: https://holmes.free/holmes-logo-32x32.svg
+3. Use this URL in your BaseScan application
+
+OPTION 2: Upload to IPFS (Best Alternative)
+--------------------------------------------
+1. Go to https://ipfs.io/ or use a service like Pinata
+2. Upload the SVG file (public/holmes-logo-32x32.svg)
+3. Use the IPFS URL in your BaseScan application
+4. Example: https://ipfs.io/ipfs/Qm... (your IPFS hash)
+
+OPTION 3: Use Free Image Hosting (Temporary)
+---------------------------------------------
+1. Use a service like:
+   - https://imgbb.com/
+   - https://postimages.org/
+   - https://imgur.com/
+2. Upload the SVG file
+3. Use the direct image URL in your BaseScan application
+
+OPTION 4: Create a Proper Favicon
+-------------------------------
+1. Create a proper favicon.ico file
+2. Add it to the public/ directory
+3. Update the app/layout.tsx to use it
+4. Deploy the site
+
+SVG LOGO CONTENT (for easy copying):
+====================================
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" fill="#F59E0B"/>
+  <text x="16" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">H</text>
+</svg>
+
+QUICK FIX FOR BASESCAN APPLICATION:
+===================================
+Since you need to submit the application now, here's what to do:
+
+1. Copy the SVG content above
+2. Go to https://svgur.com/ (free SVG hosting)
+3. Paste the SVG content
+4. Click "Upload"
+5. Copy the direct URL they provide
+6. Use that URL in your BaseScan application
+
+VERIFIED PROJECT LINKS:
+=======================
+✅ FAQ Section: https://holmes.free/#faq (working)
+✅ Whitepaper: https://holmes.free/holmes-whitepaper.pdf (working)
+✅ Website: https://holmes.free (working)
+✅ GitHub: https://github.com/holmesfree (working)
+
+RECOMMENDATION:
+===============
+For the fastest solution, use Option 3 (free image hosting) to get a working URL immediately, then update it later when you deploy your site.
