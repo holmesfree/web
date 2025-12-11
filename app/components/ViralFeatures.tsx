@@ -14,8 +14,10 @@ import {
   Flame,
   Zap,
   Heart,
-  TrendingUp
+  TrendingUp,
+  Feather
 } from 'lucide-react';
+import MintButton from './MintButton';
 
 // Simulated live stats that would come from blockchain/API
 const useStats = () => {
@@ -53,8 +55,8 @@ const useCountdown = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Countdown to July 4, 2025 - "Independence Day for Holmes"
-    const targetDate = new Date('2025-07-04T00:00:00');
+    // Countdown to July 4, 2026 - "Independence Day for Holmes"
+    const targetDate = new Date('2026-07-04T00:00:00');
 
     const updateCountdown = () => {
       const now = new Date();
@@ -132,7 +134,7 @@ export default function ViralFeatures() {
                 <Zap className="w-5 h-5 text-amber-400" />
                 <h3 className="font-bold text-lg">Countdown to Independence Day</h3>
               </div>
-              <p className="text-sm text-muted-foreground mb-6">July 4, 2025 - The day we deliver our petition</p>
+              <p className="text-sm text-muted-foreground mb-6">July 4, 2026 - The day we deliver our petition</p>
 
               <div className="grid grid-cols-4 gap-3">
                 {[
@@ -241,10 +243,13 @@ export default function ViralFeatures() {
         </Card>
 
         {/* Call to Action */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 space-y-8">
           <p className="text-xl sm:text-2xl font-serif italic text-muted-foreground max-w-2xl mx-auto">
             &ldquo;In a world that loves a comeback story, let&apos;s write one together.&rdquo;
           </p>
+          <div className="flex justify-center">
+            <MintButton size="large" />
+          </div>
         </div>
       </div>
     </section>
