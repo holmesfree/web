@@ -18,12 +18,13 @@ export const useBanner = () => useContext(BannerContext);
 // Provider component to wrap the app
 export function BannerProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
-  const [dismissed, setDismissed] = useState(true);
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const wasDismissed = localStorage.getItem(BANNER_DISMISSED_KEY);
-    setDismissed(wasDismissed === 'true');
+    // Always show banner on page load - clear any previous dismissal
+    localStorage.removeItem(BANNER_DISMISSED_KEY);
+    setDismissed(false);
   }, []);
 
   const bannerVisible = mounted && !dismissed;
@@ -37,7 +38,7 @@ export function BannerProvider({ children }: { children: React.ReactNode }) {
 
 export default function MintBanner() {
   const [mounted, setMounted] = useState(false);
-  const [dismissed, setDismissed] = useState(true);
+  const [dismissed, setDismissed] = useState(false);
   const [mintCount, setMintCount] = useState(0);
   const [displayCount, setDisplayCount] = useState(0);
   const animationRef = useRef<NodeJS.Timeout | null>(null);
@@ -91,8 +92,9 @@ export default function MintBanner() {
 
   useEffect(() => {
     setMounted(true);
-    const wasDismissed = localStorage.getItem(BANNER_DISMISSED_KEY);
-    setDismissed(wasDismissed === 'true');
+    // Always show banner on page load - clear any previous dismissal
+    localStorage.removeItem(BANNER_DISMISSED_KEY);
+    setDismissed(false);
   }, []);
 
   const handleDismiss = () => {
