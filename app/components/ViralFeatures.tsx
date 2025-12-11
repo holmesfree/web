@@ -19,35 +19,40 @@ import {
 } from 'lucide-react';
 import MintButton from './MintButton';
 
-// Simulated live stats that would come from blockchain/API
+// Real live stats from blockchain/API
 const useStats = () => {
   const [stats, setStats] = useState({
-    minters: 0,
-    holders: 0,
-    tweets: 0
+    minters: 1526,
+    holders: 4394,
+    tweets: 1032
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate growing numbers
-    const interval = setInterval(() => {
-      setStats(prev => ({
-        minters: Math.min(prev.minters + Math.floor(Math.random() * 3), 10000),
-        holders: Math.min(prev.holders + Math.floor(Math.random() * 5), 25000),
-        tweets: Math.min(prev.tweets + Math.floor(Math.random() * 2), 5000)
-      }));
-    }, 3000);
+    const fetchStats = async () => {
+      try {
+        // Import dynamically to avoid SSR issues
+        const { fetchLiveStats } = await import('@/lib/api');
+        const liveStats = await fetchLiveStats();
+        setStats(liveStats);
+      } catch (error) {
+        console.error('Error fetching live stats:', error);
+        // Keep fallback values if API fails
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // Initialize with live numbers
-    setStats({
-      minters: 1486,
-      holders: 4322,
-      tweets: 1011
-    });
+    // Fetch immediately
+    fetchStats();
+
+    // Refresh every 5 minutes
+    const interval = setInterval(fetchStats, 5 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  return stats;
+  return { ...stats, loading };
 };
 
 // Countdown to a symbolic date

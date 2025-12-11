@@ -704,16 +704,16 @@ export default function Gallery() {
                       <Card className={`border-border/30 bg-card/50 backdrop-blur-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 ${
                         event.featured ? 'border-primary/40 ring-1 ring-primary/20' : ''
                       }`}>
-                        <div className="relative aspect-video overflow-hidden">
+                        <div className="relative h-24 overflow-hidden">
                           <Image
                             src={event.image}
                             alt={event.title}
                             fill
                             className="object-cover object-top transition-transform duration-700 hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/80 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-transparent" />
                           <Badge
-                            className={`absolute top-3 left-3 text-xs px-2 py-1 font-bold ${
+                            className={`absolute top-2 left-2 text-xs px-2 py-1 font-bold ${
                               event.trend === 'up'
                                 ? 'bg-green-500/90 text-white'
                                 : event.type === 'future'
@@ -808,16 +808,16 @@ export default function Gallery() {
                     <Card className={`flex-1 border-border/30 bg-card/50 backdrop-blur-lg overflow-hidden ${
                       event.featured ? 'border-primary/40' : ''
                     }`}>
-                      <div className="relative aspect-video overflow-hidden">
+                      <div className="relative h-20 overflow-hidden">
                         <Image
                           src={event.image}
                           alt={event.title}
                           fill
                           className="object-cover object-top"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-transparent" />
                         <Badge
-                          className={`absolute top-3 left-3 text-xs px-2 py-1 font-bold ${
+                          className={`absolute top-2 left-2 text-xs px-2 py-1 font-bold ${
                             event.trend === 'up'
                               ? 'bg-green-500/90 text-white'
                               : event.type === 'future'
