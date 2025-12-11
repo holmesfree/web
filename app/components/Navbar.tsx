@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Feather, Wallet, Loader2 } from 'lucide-react';
-import { useAccount, useConnect, useDisconnect, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useAccount, useConnect, useDisconnect, useWriteContract, useReadContract, useWaitForTransactionReceipt, useSwitchChain } from 'wagmi';
+import { base } from 'wagmi/chains';
 import { HOLMES_ADDRESS, HOLMES_ABI } from '@/lib/wagmi';
 
 export default function Navbar() {
@@ -12,9 +13,12 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, chainId } = useAccount();
   const { connect, connectors, isPending: isConnectPending } = useConnect();
   const { disconnect } = useDisconnect();
+  const { switchChain, isPending: isSwitchPending } = useSwitchChain();
+
+  const isWrongNetwork = isConnected && chainId !== base.id;
 
   // Check if user has already minted
   const { data: hasMinted } = useReadContract({
@@ -46,6 +50,8 @@ export default function Navbar() {
   const handleWalletAction = () => {
     if (!isConnected) {
       connect({ connector: connectors[0] });
+    } else if (isWrongNetwork) {
+      switchChain({ chainId: base.id });
     } else if (!hasMinted && !isMintPending && !isConfirming) {
       writeContract({
         address: HOLMES_ADDRESS,
@@ -59,6 +65,8 @@ export default function Navbar() {
     if (!mounted) return { text: 'Connect', icon: <Wallet className="w-4 h-4 mr-2" /> };
     if (isConnectPending) return { text: 'Connecting...', icon: <Loader2 className="w-4 h-4 mr-2 animate-spin" /> };
     if (!isConnected) return { text: 'Connect Wallet', icon: <Wallet className="w-4 h-4 mr-2" /> };
+    if (isWrongNetwork) return { text: 'Switch to Base', icon: <Wallet className="w-4 h-4 mr-2" /> };
+    if (isSwitchPending) return { text: 'Switching...', icon: <Loader2 className="w-4 h-4 mr-2 animate-spin" /> };
     if (isMintPending || isConfirming) return { text: 'Minting...', icon: <Loader2 className="w-4 h-4 mr-2 animate-spin" /> };
     if (hasMinted) return { text: `${address?.slice(0, 6)}...${address?.slice(-4)}`, icon: null };
     return { text: 'Free Mint', icon: <Feather className="w-4 h-4 mr-2" /> };

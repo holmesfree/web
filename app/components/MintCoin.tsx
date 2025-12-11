@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { useAccount, useConnect, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useAccount, useConnect, useWriteContract, useReadContract, useWaitForTransactionReceipt, useSwitchChain } from 'wagmi';
+import { base } from 'wagmi/chains';
 import { HOLMES_ADDRESS, HOLMES_ABI } from '@/lib/wagmi';
 import { Loader2, Check, Wallet } from 'lucide-react';
 import { formatUnits } from 'viem';
@@ -13,8 +14,11 @@ export default function MintCoin() {
   const [showMintEffect, setShowMintEffect] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, chainId } = useAccount();
   const { connect, connectors } = useConnect();
+  const { switchChain } = useSwitchChain();
+
+  const isWrongNetwork = isConnected && chainId !== base.id;
 
   // Check if user has already minted
   const { data: hasMinted, refetch: refetchHasMinted } = useReadContract({
@@ -63,6 +67,12 @@ export default function MintCoin() {
     // If not connected, connect wallet
     if (!isConnected) {
       connect({ connector: connectors[0] });
+      return;
+    }
+
+    // If on wrong network, switch to Base
+    if (isWrongNetwork) {
+      switchChain({ chainId: base.id });
       return;
     }
 
@@ -152,6 +162,7 @@ export default function MintCoin() {
   const getStatusText = () => {
     if (!mounted) return 'Loading...';
     if (!isConnected) return 'Click to Connect Wallet';
+    if (isWrongNetwork) return 'Click to Switch to Base';
     if (hasMinted) {
       const formattedBalance = balance ? formatUnits(balance, 18) : '0';
       return `You have ${Number(formattedBalance).toLocaleString()} HOLMES`;
