@@ -141,29 +141,71 @@ export default function HowToMint() {
           </div>
 
           {/* Contract Address */}
-          <Card className="border-border/30 bg-card/30 backdrop-blur-sm mb-12">
-            <CardContent className="p-8 text-center">
-              <p className="text-sm text-muted-foreground mb-4">Contract Address (Base)</p>
-              <code className="block text-base font-mono text-primary bg-secondary/30 px-6 py-4 rounded-xl break-all mb-4">
-                {HOLMES_ADDRESS}
-              </code>
-              <p className="text-xs text-muted-foreground">Always verify before minting</p>
+          <Card className="border-2 border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-orange-500/5 backdrop-blur-sm mb-12">
+            <CardContent className="p-8">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <p className="text-sm font-bold text-foreground">HOLMES Contract (Base)</p>
+                <span className="text-xs px-3 py-1 bg-green-500/10 text-green-400 rounded-full border border-green-500/20">
+                  Verified
+                </span>
+              </div>
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-background/80 border border-amber-500/20 mb-4">
+                <code className="flex-1 text-base font-mono text-amber-300 break-all text-center font-semibold">
+                  {HOLMES_ADDRESS}
+                </code>
+                <Button
+                  onClick={copyToClipboard}
+                  size="icon"
+                  variant="ghost"
+                  className="shrink-0 hover:bg-amber-500/20"
+                  title="Copy address"
+                >
+                  {copied ? (
+                    <Check className="w-4 h-4 text-green-400" />
+                  ) : (
+                    <Copy className="w-4 h-4 text-amber-400" />
+                  )}
+                </Button>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button
+                  onClick={addToMetaMask}
+                  variant="outline"
+                  className="flex-1 border-amber-500/40 hover:bg-amber-500/20"
+                >
+                  {addedToWallet ? (
+                    <>
+                      <Check className="w-4 h-4 mr-2 text-green-400" />
+                      Added to Wallet
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add to MetaMask
+                    </>
+                  )}
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="flex-1 border-amber-500/40 hover:bg-amber-500/20"
+                >
+                  <a
+                    href={`https://basescan.org/token/${HOLMES_ADDRESS}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    View on Basescan
+                  </a>
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <MintButton />
-            <Button asChild variant="outline" size="lg" className="h-14 px-10 text-base font-semibold">
-              <a
-                href={`https://basescan.org/address/${HOLMES_ADDRESS}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on Basescan
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </a>
-            </Button>
           </div>
         </div>
       </div>
