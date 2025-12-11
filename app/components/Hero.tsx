@@ -48,9 +48,9 @@ export default function Hero() {
 
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight mb-8 animate-fade-in delay-100">
-            <span className="text-foreground">Everyone deserves</span>
+            <span className="text-foreground">Free Elizabeth</span>
             <br />
-            <span className="gradient-text">redemption.</span>
+            <span className="gradient-text">Holmes.</span>
           </h1>
 
           {/* Mission Statement */}
