@@ -76,10 +76,9 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '#about', label: 'Story' },
-    { href: '#gallery', label: 'Gallery' },
     { href: '#tokenomics', label: 'Token' },
+    { href: '#trade', label: 'Trade' },
     { href: '#how-to-mint', label: 'Mint' },
-    { href: '#community', label: 'Community' },
     { href: '#faq', label: 'FAQ' },
   ];
 

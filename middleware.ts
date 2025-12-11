@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const CANONICAL_DOMAIN = 'freeholmes.org'
+const CANONICAL_DOMAIN = 'holmes.free'
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host') || ''
@@ -17,21 +17,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  // Allow canonical domain
+  if (host.includes(CANONICAL_DOMAIN)) {
+    return NextResponse.next()
+  }
+
   // Redirect non-canonical domains to canonical
-  if (!host.includes(CANONICAL_DOMAIN)) {
-    url.host = CANONICAL_DOMAIN
-    url.protocol = 'https'
-    url.port = ''
-    return NextResponse.redirect(url, 301)
-  }
-
-  // Ensure HTTPS on canonical domain
-  if (request.headers.get('x-forwarded-proto') !== 'https') {
-    url.protocol = 'https'
-    return NextResponse.redirect(url, 301)
-  }
-
-  return NextResponse.next()
+  url.host = CANONICAL_DOMAIN
+  url.protocol = 'https'
+  url.port = ''
+  return NextResponse.redirect(url, 301)
 }
 
 export const config = {

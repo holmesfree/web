@@ -6,6 +6,7 @@ import Backers from './components/Backers';
 import About from './components/About';
 import Gallery from './components/Gallery';
 import Tokenomics from './components/Tokenomics';
+import Trade from './components/Trade';
 import HowToMint from './components/HowToMint';
 import ViralFeatures from './components/ViralFeatures';
 import FAQ from './components/FAQ';
@@ -21,6 +22,7 @@ export default function Home() {
       <About />
       <Gallery />
       <Tokenomics />
+      <Trade />
       <HowToMint />
       <ViralFeatures />
       <FAQ />

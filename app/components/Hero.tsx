@@ -37,7 +37,7 @@ export default function Hero() {
             address: contractAddress,
             symbol: 'HOLMES',
             decimals: 18,
-            image: 'https://freeholmes.org/elizabeth-holmes.jpg',
+            image: 'https://holmes.free/elizabeth-holmes.jpg',
           },
         },
       });

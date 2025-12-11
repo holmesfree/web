@@ -32,7 +32,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'freeholmes.org',
+        hostname: 'holmes.free',
       },
     ],
   },

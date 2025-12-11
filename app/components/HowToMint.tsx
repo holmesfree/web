@@ -33,7 +33,7 @@ export default function HowToMint() {
             address: HOLMES_ADDRESS,
             symbol: 'HOLMES',
             decimals: 18,
-            image: 'https://freeholmes.org/elizabeth-holmes.jpg',
+            image: 'https://holmes.free/elizabeth-holmes.jpg',
           },
         },
       });

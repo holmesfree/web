@@ -83,7 +83,7 @@ export default function ViralFeatures() {
   const stats = useStats();
   const countdown = useCountdown();
 
-  const shareUrl = 'https://freeholmes.org';
+  const shareUrl = 'https://holmes.free';
   const shareText = "Everyone deserves a second chance. 🔥 Free mint $HOLMES token - a movement for redemption. #FreeHolmes #SecondChance";
 
   const copyLink = () => {
