@@ -39,7 +39,7 @@ const timelineEvents = [
     type: 'milestone',
     trend: 'up',
     icon: Building2,
-    image: '/elizabeth-holmes.jpg',
+    image: '/march2003.jpg',
     stats: [
       { label: 'Age', value: '19' },
       { label: 'Funding', value: '$6M' },
@@ -56,7 +56,7 @@ const timelineEvents = [
     type: 'milestone',
     trend: 'up',
     icon: Award,
-    image: '/holmes-2014-full.jpg',
+    image: '/december2004.jpg',
     stats: [
       { label: 'Patents Filed', value: '18' },
       { label: 'Employees', value: '12' },
@@ -73,7 +73,7 @@ const timelineEvents = [
     type: 'deal',
     trend: 'up',
     icon: Building,
-    image: '/elizabeth-holmes.jpg',
+    image: '/september2010.jpg',
     stats: [
       { label: 'Deal Value', value: '$140M' },
       { label: 'Planned Locations', value: '4,500+' },
@@ -94,7 +94,7 @@ const timelineEvents = [
     type: 'deal',
     trend: 'up',
     icon: DollarSign,
-    image: '/holmes-2014-full.jpg',
+    image: '/july2011.jpg',
     stats: [
       { label: 'Investment', value: '$350M' },
       { label: 'Planned Stores', value: '800+' },
@@ -112,7 +112,7 @@ const timelineEvents = [
     type: 'media',
     trend: 'up',
     icon: Newspaper,
-    image: '/elizabeth-holmes.jpg',
+    image: '/september2013.jpg',
     stats: [
       { label: 'Net Worth', value: '$4.5B' },
       { label: 'Forbes Rank', value: '#110' },
@@ -133,7 +133,7 @@ const timelineEvents = [
     type: 'media',
     trend: 'up',
     icon: Mic,
-    image: '/holmes-2014-full.jpg',
+    image: '/march2014.jpg',
     stats: [
       { label: 'Views', value: '2M+' },
       { label: 'Standing Ovation', value: '✓' },
@@ -155,7 +155,7 @@ const timelineEvents = [
     type: 'milestone',
     trend: 'up',
     icon: Users,
-    image: '/elizabeth-holmes.jpg',
+    image: '/June2014.jpg',
     stats: [
       { label: 'Board Members', value: '12' },
       { label: 'Former Cabinet', value: '4' },
@@ -177,7 +177,7 @@ const timelineEvents = [
     type: 'milestone',
     trend: 'up',
     icon: TrendingUp,
-    image: '/holmes-2014-full.jpg',
+    image: '/september2014.jpg',
     stats: [
       { label: 'Valuation', value: '$9B' },
       { label: 'Total Raised', value: '$700M+' },
@@ -199,7 +199,7 @@ const timelineEvents = [
     type: 'media',
     trend: 'up',
     icon: Award,
-    image: '/elizabeth-holmes.jpg',
+    image: '/april2015.jpg',
     stats: [
       { label: 'Magazine Covers', value: '15+' },
       { label: 'Profiler', value: 'Kissinger' },
@@ -221,7 +221,7 @@ const timelineEvents = [
     type: 'turning_point',
     trend: 'down',
     icon: AlertTriangle,
-    image: '/holmes-2014-full.jpg',
+    image: '/october2015.jpg',
     stats: [
       { label: 'Whistleblowers', value: '20+' },
       { label: 'Tests Voided', value: 'Thousands' },
@@ -243,7 +243,7 @@ const timelineEvents = [
     type: 'downfall',
     trend: 'down',
     icon: Gavel,
-    image: '/elizabeth-holmes.jpg',
+    image: '/January2016.jpg',
     stats: [
       { label: 'Violations', value: 'Serious' },
       { label: 'Ban Length', value: '2 Years' },
@@ -264,7 +264,7 @@ const timelineEvents = [
     type: 'downfall',
     trend: 'down',
     icon: TrendingDown,
-    image: '/holmes-2014-full.jpg',
+    image: '/june2016.jpg',
     stats: [
       { label: 'Previous Worth', value: '$4.5B' },
       { label: 'New Worth', value: '$0' },
@@ -286,7 +286,7 @@ const timelineEvents = [
     type: 'legal',
     trend: 'down',
     icon: Scale,
-    image: '/elizabeth-holmes.jpg',
+    image: '/march2018.jpg',
     stats: [
       { label: 'Settlement', value: '$500K' },
       { label: 'Officer Ban', value: '10 Years' },
@@ -307,7 +307,7 @@ const timelineEvents = [
     type: 'legal',
     trend: 'down',
     icon: Gavel,
-    image: '/holmes-2014-full.jpg',
+    image: '/june2018.jpg',
     stats: [
       { label: 'Charges', value: '12' },
       { label: 'Max Sentence', value: '20 Years' },
@@ -328,7 +328,7 @@ const timelineEvents = [
     type: 'downfall',
     trend: 'down',
     icon: Building2,
-    image: '/elizabeth-holmes.jpg',
+    image: '/september2018.jpg',
     stats: [
       { label: 'Final Employees', value: '0' },
       { label: 'Assets Sold', value: 'All' },
@@ -345,7 +345,7 @@ const timelineEvents = [
     type: 'personal',
     trend: 'neutral',
     icon: Heart,
-    image: '/holmes-2014-full.jpg',
+    image: '/july2021.jpg',
     stats: [
       { label: 'Children', value: '2' },
     ],
@@ -362,7 +362,7 @@ const timelineEvents = [
     type: 'legal',
     trend: 'down',
     icon: Gavel,
-    image: '/elizabeth-holmes.jpg',
+    image: '/january2022.jpg',
     stats: [
       { label: 'Guilty', value: '4 counts' },
       { label: 'Acquitted', value: '4 counts' },
@@ -384,7 +384,7 @@ const timelineEvents = [
     type: 'legal',
     trend: 'down',
     icon: Scale,
-    image: '/holmes-2014-full.jpg',
+    image: '/november2022.jpg',
     stats: [
       { label: 'Sentence', value: '11.25 yrs' },
       { label: 'Restitution', value: '$452M' },
@@ -405,7 +405,7 @@ const timelineEvents = [
     type: 'legal',
     trend: 'down',
     icon: Building,
-    image: '/elizabeth-holmes.jpg',
+    image: '/may2023.jpg',
     stats: [
       { label: 'Location', value: 'Texas' },
       { label: 'Security', value: 'Minimum' },
@@ -426,7 +426,7 @@ const timelineEvents = [
     type: 'legal',
     trend: 'down',
     icon: Gavel,
-    image: '/holmes-2014-full.jpg',
+    image: '/september2024.jpg',
     stats: [
       { label: 'Appeals', value: 'Denied' },
       { label: 'Next Option', value: 'SCOTUS' },
@@ -704,16 +704,16 @@ export default function Gallery() {
                       <Card className={`border-border/30 bg-card/50 backdrop-blur-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 ${
                         event.featured ? 'border-primary/40 ring-1 ring-primary/20' : ''
                       }`}>
-                        <div className="relative h-24 overflow-hidden">
+                        <div className="relative aspect-video overflow-hidden">
                           <Image
                             src={event.image}
                             alt={event.title}
                             fill
                             className="object-cover object-top transition-transform duration-700 hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                           <Badge
-                            className={`absolute top-2 left-2 text-xs px-2 py-1 font-bold ${
+                            className={`absolute top-4 left-4 text-sm px-3 py-1.5 font-bold ${
                               event.trend === 'up'
                                 ? 'bg-green-500/90 text-white'
                                 : event.type === 'future'
@@ -730,42 +730,42 @@ export default function Gallery() {
                               rel="noopener noreferrer"
                               className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity"
                             >
-                              <div className="w-12 h-12 rounded-full bg-white/95 flex items-center justify-center shadow-xl">
-                                <Play className="w-5 h-5 text-black ml-1" />
+                              <div className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-2xl">
+                                <Play className="w-6 h-6 text-black ml-1" />
                               </div>
                             </a>
                           )}
                         </div>
-                        <CardContent className="p-4">
-                          <div className="flex items-start justify-between mb-2">
+                        <CardContent className="p-6">
+                          <div className="flex items-start justify-between mb-3">
                             <div>
                               <p className="text-xs text-muted-foreground mb-1">{event.month} {event.year}</p>
-                              <h3 className="text-lg font-bold text-foreground">{event.title}</h3>
+                              <h3 className="text-xl font-bold text-foreground">{event.title}</h3>
                             </div>
                             {event.source && (
-                              <span className="text-xl">{event.source.logo}</span>
+                              <span className="text-2xl">{event.source.logo}</span>
                             )}
                           </div>
-                          <h4 className="text-base font-semibold text-primary mb-2">{event.headline}</h4>
-                          <p className="text-muted-foreground text-sm leading-relaxed mb-3">
+                          <h4 className="text-lg font-semibold text-primary mb-3">{event.headline}</h4>
+                          <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                             {event.longDescription || event.description}
                           </p>
                           {event.stats && (
-                            <div className="flex flex-wrap gap-3 mb-3">
+                            <div className="flex flex-wrap gap-4 mb-4">
                               {event.stats.map((stat, i) => (
                                 <div key={i} className="text-center">
-                                  <div className="text-base font-bold text-foreground">{stat.value}</div>
+                                  <div className="text-lg font-bold text-foreground">{stat.value}</div>
                                   <div className="text-xs text-muted-foreground">{stat.label}</div>
                                 </div>
                               ))}
                             </div>
                           )}
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-3">
                             {event.source && (
-                              <Button variant="outline" size="sm" asChild className="h-8 text-xs">
+                              <Button variant="outline" size="sm" asChild className="h-9">
                                 <a href={event.source.url} target="_blank" rel="noopener noreferrer">
-                                  <ExternalLink className="w-3 h-3 mr-1" />
-                                  Source
+                                  <ExternalLink className="w-3 h-3 mr-2" />
+                                  {event.source.name}
                                 </a>
                               </Button>
                             )}
@@ -773,9 +773,9 @@ export default function Gallery() {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleShare(event)}
-                              className="h-8 text-xs"
+                              className="h-9 text-muted-foreground hover:text-foreground"
                             >
-                              <Share2 className="w-3 h-3 mr-1" />
+                              <Share2 className="w-3 h-3 mr-2" />
                               Share
                             </Button>
                           </div>
@@ -808,16 +808,16 @@ export default function Gallery() {
                     <Card className={`flex-1 border-border/30 bg-card/50 backdrop-blur-lg overflow-hidden ${
                       event.featured ? 'border-primary/40' : ''
                     }`}>
-                      <div className="relative h-20 overflow-hidden">
+                      <div className="relative aspect-video overflow-hidden">
                         <Image
                           src={event.image}
                           alt={event.title}
                           fill
                           className="object-cover object-top"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                         <Badge
-                          className={`absolute top-2 left-2 text-xs px-2 py-1 font-bold ${
+                          className={`absolute top-4 left-4 text-sm px-3 py-1.5 font-bold ${
                             event.trend === 'up'
                               ? 'bg-green-500/90 text-white'
                               : event.type === 'future'
@@ -828,7 +828,7 @@ export default function Gallery() {
                           {event.year}
                         </Badge>
                       </div>
-                      <CardContent className="p-3">
+                      <CardContent className="p-4">
                         <p className="text-xs text-muted-foreground mb-1">{event.month} {event.year}</p>
                         <h3 className="text-base font-bold text-foreground mb-1">{event.title}</h3>
                         <h4 className="text-sm font-medium text-primary mb-2">{event.headline}</h4>
