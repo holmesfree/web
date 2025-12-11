@@ -1,11 +1,48 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Twitter, Send, MessageCircle, FileText, ExternalLink, Github } from 'lucide-react';
+import { Twitter, Send, MessageCircle, FileText, ExternalLink, Github, Copy, Check, Plus } from 'lucide-react';
+import { HOLMES_ADDRESS } from '@/lib/wagmi';
 
 export default function Footer() {
+  const [copied, setCopied] = useState(false);
+  const [addedToWallet, setAddedToWallet] = useState(false);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(HOLMES_ADDRESS);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const addToMetaMask = async () => {
+    if (typeof window === 'undefined' || !window.ethereum) {
+      alert('Please install MetaMask to add the token');
+      return;
+    }
+
+    try {
+      await window.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: HOLMES_ADDRESS,
+            symbol: 'HOLMES',
+            decimals: 18,
+            image: 'https://freeholmes.org/elizabeth-holmes.jpg',
+          },
+        },
+      });
+      setAddedToWallet(true);
+      setTimeout(() => setAddedToWallet(false), 2000);
+    } catch (error) {
+      console.error('Failed to add token to wallet:', error);
+    }
+  };
+
   const navLinks = [
     { href: '#about', label: 'The Story' },
     { href: '#tokenomics', label: 'Tokenomics' },
@@ -15,7 +52,7 @@ export default function Footer() {
 
   const resourceLinks = [
     { href: '/holmes-whitepaper.pdf', label: 'Manifesto' },
-    { href: 'https://basescan.org', label: 'Basescan' },
+    { href: `https://basescan.org/token/${HOLMES_ADDRESS}`, label: 'Basescan' },
     { href: 'https://github.com/free-holmes', label: 'GitHub' },
   ];
 
@@ -83,14 +120,69 @@ export default function Footer() {
         </div>
 
         {/* Contract Address */}
-        <div className="mb-16 p-6 rounded-2xl bg-card/50 border border-border/30 max-w-xl">
-          <div className="flex items-center gap-3 mb-3">
-            <FileText className="w-5 h-5 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">Contract (Base)</span>
+        <div className="mb-16 p-6 rounded-2xl bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border-2 border-amber-500/30 max-w-2xl">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <FileText className="w-5 h-5 text-amber-400" />
+              <span className="text-sm font-bold text-foreground">HOLMES Contract (Base)</span>
+            </div>
+            <span className="text-xs px-3 py-1 bg-green-500/10 text-green-400 rounded-full border border-green-500/20">
+              Live
+            </span>
           </div>
-          <code className="text-sm font-mono text-foreground/70 break-all">
-            Coming Soon - Contract Not Yet Deployed
-          </code>
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-background/80 border border-amber-500/20 mb-4">
+            <code className="flex-1 font-mono text-sm sm:text-base text-amber-300 break-all font-semibold">
+              {HOLMES_ADDRESS}
+            </code>
+            <Button
+              onClick={copyToClipboard}
+              size="icon"
+              variant="ghost"
+              className="shrink-0 hover:bg-amber-500/20"
+              title="Copy address"
+            >
+              {copied ? (
+                <Check className="w-4 h-4 text-green-400" />
+              ) : (
+                <Copy className="w-4 h-4 text-amber-400" />
+              )}
+            </Button>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button
+              onClick={addToMetaMask}
+              variant="outline"
+              size="sm"
+              className="flex-1 border-amber-500/40 hover:bg-amber-500/20"
+            >
+              {addedToWallet ? (
+                <>
+                  <Check className="w-4 h-4 mr-2 text-green-400" />
+                  Added to Wallet
+                </>
+              ) : (
+                <>
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add to MetaMask
+                </>
+              )}
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="flex-1 border-amber-500/40 hover:bg-amber-500/20"
+            >
+              <a
+                href={`https://basescan.org/token/${HOLMES_ADDRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                View on Basescan
+              </a>
+            </Button>
+          </div>
         </div>
 
         <Separator className="mb-10 bg-border/30" />

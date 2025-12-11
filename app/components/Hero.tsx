@@ -136,54 +136,69 @@ export default function Hero() {
             </Button>
           </div>
 
-          {/* Contract Address Card */}
-          <Card className="max-w-xl mx-auto border-border/30 bg-card/30 backdrop-blur-sm animate-fade-in delay-400">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Contract Address (Base)
-                </span>
-                <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20">
-                  <Check className="w-3 h-3 mr-1" />
+          {/* Contract Address Card - Prominent */}
+          <Card className="max-w-2xl mx-auto border-2 border-amber-500/40 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 backdrop-blur-sm animate-fade-in delay-400 shadow-lg shadow-amber-500/10">
+            <CardContent className="p-8">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 px-4 py-1.5 text-sm">
+                  <Check className="w-4 h-4 mr-2" />
                   Live on Base
                 </Badge>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-background/50 border border-border/30">
-                <code className="flex-1 font-mono text-sm text-foreground/70 break-all">
+              <h3 className="text-lg font-bold text-center text-foreground mb-4">
+                HOLMES Token Contract
+              </h3>
+              <div className="flex items-center gap-3 p-5 rounded-xl bg-background/80 border-2 border-amber-500/30">
+                <code className="flex-1 font-mono text-base sm:text-lg text-amber-300 break-all font-semibold text-center">
                   {contractAddress}
                 </code>
                 <Button
                   onClick={copyToClipboard}
                   size="icon"
-                  variant="ghost"
-                  className="shrink-0"
+                  variant="outline"
+                  className="shrink-0 border-amber-500/40 hover:bg-amber-500/20"
                   title="Copy address"
                 >
                   {copied ? (
-                    <Check className="w-4 h-4 text-green-400" />
+                    <Check className="w-5 h-5 text-green-400" />
                   ) : (
-                    <Copy className="w-4 h-4" />
+                    <Copy className="w-5 h-5 text-amber-400" />
                   )}
                 </Button>
               </div>
-              <Button
-                onClick={addToMetaMask}
-                variant="outline"
-                size="sm"
-                className="w-full mt-4 border-amber-500/30 hover:bg-amber-500/10"
-              >
-                {addedToWallet ? (
-                  <>
-                    <Check className="w-4 h-4 mr-2 text-green-400" />
-                    Added to Wallet
-                  </>
-                ) : (
-                  <>
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add HOLMES to MetaMask
-                  </>
-                )}
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-3 mt-5">
+                <Button
+                  onClick={addToMetaMask}
+                  variant="outline"
+                  className="flex-1 border-amber-500/40 hover:bg-amber-500/20 h-12"
+                >
+                  {addedToWallet ? (
+                    <>
+                      <Check className="w-5 h-5 mr-2 text-green-400" />
+                      Added to Wallet
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-5 h-5 mr-2" />
+                      Add to MetaMask
+                    </>
+                  )}
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="flex-1 border-amber-500/40 hover:bg-amber-500/20 h-12"
+                >
+                  <a
+                    href={`https://basescan.org/token/${contractAddress}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="w-5 h-5 mr-2" />
+                    View on Basescan
+                  </a>
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
