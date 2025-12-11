@@ -31,6 +31,11 @@ export const TRADING_LINKS = {
   pool: `https://basescan.org/address/${POOL_ADDRESS}`,
 } as const
 
+// Free mint constants
+export const TOTAL_FREE_MINT_SUPPLY = 900_000_000 // 900M tokens for free mint (90%)
+export const TOKENS_PER_MINT = 1_000 // 1,000 tokens per mint
+export const MAX_MINTS = TOTAL_FREE_MINT_SUPPLY / TOKENS_PER_MINT // 900,000 max mints
+
 // HOLMES Token ABI (just the functions we need)
 export const HOLMES_ABI = [
   {
@@ -57,6 +62,13 @@ export const HOLMES_ABI = [
   {
     inputs: [],
     name: 'totalSupply',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'mintCount',
     outputs: [{ name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',

@@ -244,3 +244,45 @@ body {
 .hover\:pause-animation:hover {
   animation-play-state: paused;
 }
+
+/* Banner animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes gradientX {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes bannerShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+.animate-gradient-x {
+  animation: gradientX 3s ease infinite;
+}
+
+.animate-shimmer {
+  animation: bannerShimmer 2s infinite;
+}

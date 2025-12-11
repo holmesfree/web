@@ -8,10 +8,14 @@ import { useAccount, useConnect, useDisconnect, useWriteContract, useReadContrac
 import { base } from 'wagmi/chains';
 import { HOLMES_ADDRESS, HOLMES_ABI } from '@/lib/wagmi';
 
+const BANNER_DISMISSED_KEY = 'holmes-banner-dismissed';
+const BANNER_HEIGHT = 44;
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [bannerVisible, setBannerVisible] = useState(false);
 
   const { address, isConnected, chainId } = useAccount();
   const { connect, connectors, isPending: isConnectPending } = useConnect();
@@ -36,6 +40,27 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
+    // Check if banner is visible (not dismissed)
+    const wasDismissed = localStorage.getItem(BANNER_DISMISSED_KEY);
+    setBannerVisible(wasDismissed !== 'true');
+
+    // Listen for storage changes (in case banner is dismissed)
+    const handleStorage = () => {
+      const dismissed = localStorage.getItem(BANNER_DISMISSED_KEY);
+      setBannerVisible(dismissed !== 'true');
+    };
+    window.addEventListener('storage', handleStorage);
+
+    // Also poll for changes since storage event doesn't fire in same tab
+    const interval = setInterval(() => {
+      const dismissed = localStorage.getItem(BANNER_DISMISSED_KEY);
+      setBannerVisible(dismissed !== 'true');
+    }, 100);
+
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      clearInterval(interval);
+    };
   }, []);
 
   useEffect(() => {
@@ -83,10 +108,13 @@ export default function Navbar() {
     { href: '#faq', label: 'FAQ' },
   ];
 
+  const navTop = mounted && bannerVisible ? BANNER_HEIGHT : 0;
+
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        style={{ top: navTop }}
+        className={`fixed w-full z-50 transition-all duration-300 ${
           isScrolled
             ? 'bg-background/95 backdrop-blur-md border-b border-border'
             : 'bg-transparent'
