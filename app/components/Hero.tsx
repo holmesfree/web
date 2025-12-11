@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, Copy, Feather, Heart, Scale, ExternalLink, Plus, Wallet } from 'lucide-react';
-import { HOLMES_ADDRESS } from '@/lib/wagmi';
+import { Check, Copy, Feather, Heart, Scale, ExternalLink, Plus, Wallet, TrendingUp, BarChart3 } from 'lucide-react';
+import { HOLMES_ADDRESS, TRADING_LINKS } from '@/lib/wagmi';
 import { useAddTokenToWallet, useCopyToClipboard } from '@/lib/hooks';
 
 // Dynamic import to avoid SSR issues with the mint coin
@@ -134,37 +134,83 @@ export default function Hero() {
                   )}
                 </Button>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3 mt-5">
+              {/* Trading Buttons */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
                 <Button
-                  onClick={addToMetaMask}
-                  variant="outline"
-                  className="flex-1 border-amber-500/40 hover:bg-amber-500/20 h-12"
+                  asChild
+                  className="bg-pink-600 hover:bg-pink-500 text-white h-12 font-semibold"
                 >
-                  {addedToWallet ? (
-                    <>
-                      <Check className="w-5 h-5 mr-2 text-green-400" />
-                      Added to Wallet
-                    </>
-                  ) : (
-                    <>
-                      <Plus className="w-5 h-5 mr-2" />
-                      Add to MetaMask
-                    </>
-                  )}
+                  <a
+                    href={TRADING_LINKS.uniswap}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <TrendingUp className="w-4 h-4 mr-2" />
+                    Buy on Uniswap
+                  </a>
                 </Button>
                 <Button
                   asChild
                   variant="outline"
-                  className="flex-1 border-amber-500/40 hover:bg-amber-500/20 h-12"
+                  className="border-green-500/40 hover:bg-green-500/20 text-green-400 h-12"
                 >
                   <a
-                    href={`https://basescan.org/token/${contractAddress}`}
+                    href={TRADING_LINKS.dexscreener}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <ExternalLink className="w-5 h-5 mr-2" />
-                    View on Basescan
+                    <BarChart3 className="w-4 h-4 mr-2" />
+                    DEXScreener
                   </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-blue-500/40 hover:bg-blue-500/20 text-blue-400 h-12"
+                >
+                  <a
+                    href={TRADING_LINKS.dextools}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <BarChart3 className="w-4 h-4 mr-2" />
+                    DEXTools
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-amber-500/40 hover:bg-amber-500/20 h-12"
+                >
+                  <a
+                    href={TRADING_LINKS.basescan}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Basescan
+                  </a>
+                </Button>
+              </div>
+
+              {/* Wallet Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 mt-3">
+                <Button
+                  onClick={addToMetaMask}
+                  variant="outline"
+                  className="flex-1 border-amber-500/40 hover:bg-amber-500/20 h-11"
+                >
+                  {addedToWallet ? (
+                    <>
+                      <Check className="w-4 h-4 mr-2 text-green-400" />
+                      Added to Wallet
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add to MetaMask
+                    </>
+                  )}
                 </Button>
               </div>
             </CardContent>

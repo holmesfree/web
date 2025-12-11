@@ -19,6 +19,18 @@ export const HOLMES_ADDRESS = '0xA7de8462a852eBA2C9b4A3464C8fC577cb7090b8' as co
 // Uniswap Pool
 export const POOL_ADDRESS = '0xcA6C4C0743C9ed9425FF94f7BC3297C3AAFB44B8' as const
 
+// WETH on Base
+export const WETH_ADDRESS = '0x4200000000000000000000000000000000000006' as const
+
+// Trading Links
+export const TRADING_LINKS = {
+  uniswap: `https://app.uniswap.org/swap?outputCurrency=${HOLMES_ADDRESS}&chain=base`,
+  dexscreener: `https://dexscreener.com/base/${POOL_ADDRESS}`,
+  dextools: `https://www.dextools.io/app/en/base/pair-explorer/${POOL_ADDRESS}`,
+  basescan: `https://basescan.org/token/${HOLMES_ADDRESS}`,
+  pool: `https://basescan.org/address/${POOL_ADDRESS}`,
+} as const
+
 // HOLMES Token ABI (just the functions we need)
 export const HOLMES_ABI = [
   {

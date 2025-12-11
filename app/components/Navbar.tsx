@@ -79,6 +79,7 @@ export default function Navbar() {
     { href: '#tokenomics', label: 'Token' },
     { href: '#trade', label: 'Trade' },
     { href: '#how-to-mint', label: 'Mint' },
+    { href: '#news', label: 'News' },
     { href: '#faq', label: 'FAQ' },
   ];
 
