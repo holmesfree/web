@@ -3,11 +3,36 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Feather } from 'lucide-react';
+import { Menu, X, Feather, Wallet, Loader2 } from 'lucide-react';
+import { useAccount, useConnect, useDisconnect, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
+import { HOLMES_ADDRESS, HOLMES_ABI } from '@/lib/wagmi';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  const { address, isConnected } = useAccount();
+  const { connect, connectors, isPending: isConnectPending } = useConnect();
+  const { disconnect } = useDisconnect();
+
+  // Check if user has already minted
+  const { data: hasMinted } = useReadContract({
+    address: HOLMES_ADDRESS,
+    abi: HOLMES_ABI,
+    functionName: 'hasMinted',
+    args: address ? [address] : undefined,
+  });
+
+  // Write contract for minting
+  const { writeContract, data: hash, isPending: isMintPending } = useWriteContract();
+
+  // Wait for transaction
+  const { isLoading: isConfirming } = useWaitForTransactionReceipt({ hash });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +42,29 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleWalletAction = () => {
+    if (!isConnected) {
+      connect({ connector: connectors[0] });
+    } else if (!hasMinted && !isMintPending && !isConfirming) {
+      writeContract({
+        address: HOLMES_ADDRESS,
+        abi: HOLMES_ABI,
+        functionName: 'freeMint',
+      });
+    }
+  };
+
+  const getButtonContent = () => {
+    if (!mounted) return { text: 'Connect', icon: <Wallet className="w-4 h-4 mr-2" /> };
+    if (isConnectPending) return { text: 'Connecting...', icon: <Loader2 className="w-4 h-4 mr-2 animate-spin" /> };
+    if (!isConnected) return { text: 'Connect Wallet', icon: <Wallet className="w-4 h-4 mr-2" /> };
+    if (isMintPending || isConfirming) return { text: 'Minting...', icon: <Loader2 className="w-4 h-4 mr-2 animate-spin" /> };
+    if (hasMinted) return { text: `${address?.slice(0, 6)}...${address?.slice(-4)}`, icon: null };
+    return { text: 'Free Mint', icon: <Feather className="w-4 h-4 mr-2" /> };
+  };
+
+  const buttonContent = getButtonContent();
 
   const navLinks = [
     { href: '#about', label: 'Story' },
@@ -54,11 +102,12 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Button asChild className="bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 border-0">
-                <a href="#how-to-mint">
-                  <Feather className="w-4 h-4 mr-2" />
-                  Free Mint
-                </a>
+              <Button
+                onClick={handleWalletAction}
+                className="bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 border-0"
+              >
+                {buttonContent.icon}
+                {buttonContent.text}
               </Button>
             </div>
 
@@ -112,14 +161,15 @@ export default function Navbar() {
               ))}
             </div>
             <div className="mt-auto pt-6 border-t border-border">
-              <Button asChild className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 border-0 h-12">
-                <a
-                  href="#how-to-mint"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <Feather className="w-5 h-5 mr-2" />
-                  Free Mint
-                </a>
+              <Button
+                onClick={() => {
+                  handleWalletAction();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 border-0 h-12"
+              >
+                {buttonContent.icon}
+                {buttonContent.text}
               </Button>
             </div>
           </div>

@@ -5,20 +5,47 @@ import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, Copy, Feather, Heart, Scale, Sparkles, ExternalLink } from 'lucide-react';
-import MintButton from './MintButton';
+import { Check, Copy, Feather, Heart, Scale, ExternalLink, Plus, Wallet } from 'lucide-react';
+import { HOLMES_ADDRESS } from '@/lib/wagmi';
 
-// Dynamic import to avoid SSR issues with the spinning coin
-const SpinningCoin = dynamic(() => import('./SpinningCoin'), { ssr: false });
+// Dynamic import to avoid SSR issues with the mint coin
+const MintCoin = dynamic(() => import('./MintCoin'), { ssr: false });
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
-  const contractAddress = '0xA7de8462a852eBA2C9b4A3464C8fC577cb7090b8'; // HOLMES token on Base
+  const [addedToWallet, setAddedToWallet] = useState(false);
+  const contractAddress = HOLMES_ADDRESS;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(contractAddress);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const addToMetaMask = async () => {
+    if (typeof window === 'undefined' || !window.ethereum) {
+      alert('Please install MetaMask to add the token');
+      return;
+    }
+
+    try {
+      await window.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: contractAddress,
+            symbol: 'HOLMES',
+            decimals: 18,
+            image: 'https://freeholmes.org/elizabeth-holmes.jpg',
+          },
+        },
+      });
+      setAddedToWallet(true);
+      setTimeout(() => setAddedToWallet(false), 2000);
+    } catch (error) {
+      console.error('Failed to add token to wallet:', error);
+    }
   };
 
   return (
@@ -31,12 +58,9 @@ export default function Hero() {
 
       <div className="container mx-auto px-6 sm:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          {/* 3D Spinning Coin */}
+          {/* 3D Mint Coin - Click to Mint */}
           <div className="mb-10 animate-fade-in">
-            <SpinningCoin />
-            <p className="text-xs text-muted-foreground/50 mt-4">
-              Photo: Max Morse/TechCrunch (CC BY 2.0)
-            </p>
+            <MintCoin />
           </div>
 
           {/* Badge */}
@@ -100,7 +124,6 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in delay-400">
-            <MintButton />
             <Button asChild variant="outline" size="lg" className="h-14 px-10 text-base font-semibold">
               <a
                 href="/holmes-whitepaper.pdf"
@@ -134,6 +157,7 @@ export default function Hero() {
                   size="icon"
                   variant="ghost"
                   className="shrink-0"
+                  title="Copy address"
                 >
                   {copied ? (
                     <Check className="w-4 h-4 text-green-400" />
@@ -142,6 +166,24 @@ export default function Hero() {
                   )}
                 </Button>
               </div>
+              <Button
+                onClick={addToMetaMask}
+                variant="outline"
+                size="sm"
+                className="w-full mt-4 border-amber-500/30 hover:bg-amber-500/10"
+              >
+                {addedToWallet ? (
+                  <>
+                    <Check className="w-4 h-4 mr-2 text-green-400" />
+                    Added to Wallet
+                  </>
+                ) : (
+                  <>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add HOLMES to MetaMask
+                  </>
+                )}
+              </Button>
             </CardContent>
           </Card>
 

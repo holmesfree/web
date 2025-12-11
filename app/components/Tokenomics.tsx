@@ -6,11 +6,8 @@ import { PieChart, Coins, AlertTriangle, Gift } from 'lucide-react';
 
 export default function Tokenomics() {
   const tokenomicsData = [
-    { label: 'Free Mint', value: '70%', tokens: '700M', desc: 'For everyone', gradient: 'from-amber-500 to-amber-400' },
-    { label: 'Initial Liquidity', value: '10%', tokens: '100M', desc: 'Base launch', gradient: 'from-yellow-500 to-yellow-400' },
-    { label: 'Freedom Treasury', value: '10%', tokens: '100M', desc: 'For the cause', gradient: 'from-orange-500 to-orange-400' },
-    { label: 'Team & Development', value: '5%', tokens: '50M', desc: '2-year vest', gradient: 'from-red-500 to-red-400' },
-    { label: 'Marketing', value: '5%', tokens: '50M', desc: 'Spread the word', gradient: 'from-rose-500 to-rose-400' },
+    { label: 'Free Mint', value: '90%', tokens: '900M', desc: 'Click to mint', gradient: 'from-amber-500 to-amber-400' },
+    { label: 'Initial Liquidity', value: '10%', tokens: '100M', desc: 'Uniswap LP', gradient: 'from-yellow-500 to-yellow-400' },
   ];
 
   const specs = [
@@ -84,7 +81,7 @@ export default function Tokenomics() {
         </div>
 
         {/* Distribution Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-6 max-w-5xl mx-auto mb-16">
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 max-w-2xl mx-auto mb-16">
           {tokenomicsData.map((item, index) => (
             <Card
               key={index}
