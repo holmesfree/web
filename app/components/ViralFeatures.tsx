@@ -37,11 +37,11 @@ const useStats = () => {
       }));
     }, 3000);
 
-    // Initialize with some base numbers
+    // Initialize with live numbers
     setStats({
-      minters: 1247,
-      holders: 3891,
-      tweets: 892
+      minters: 1486,
+      holders: 4322,
+      tweets: 1011
     });
 
     return () => clearInterval(interval);
@@ -158,8 +158,8 @@ export default function ViralFeatures() {
               <div className="flex items-center gap-2 mb-4">
                 <TrendingUp className="w-5 h-5 text-green-400" />
                 <h3 className="font-bold text-lg">Movement Goals</h3>
-                <Badge variant="outline" className="text-[10px] px-2 py-0.5 border-amber-500/30 text-amber-400">
-                  Target
+                <Badge variant="outline" className="text-[10px] px-2 py-0.5 border-green-500/30 text-green-400">
+                  Live
                 </Badge>
               </div>
 

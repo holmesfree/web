@@ -711,9 +711,9 @@ export default function Gallery() {
                             fill
                             className="object-cover object-top transition-transform duration-700 hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/80 to-transparent" />
                           <Badge
-                            className={`absolute top-4 left-4 text-sm px-3 py-1.5 font-bold ${
+                            className={`absolute top-3 left-3 text-xs px-2 py-1 font-bold ${
                               event.trend === 'up'
                                 ? 'bg-green-500/90 text-white'
                                 : event.type === 'future'
@@ -730,42 +730,42 @@ export default function Gallery() {
                               rel="noopener noreferrer"
                               className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity"
                             >
-                              <div className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-2xl">
-                                <Play className="w-6 h-6 text-black ml-1" />
+                              <div className="w-12 h-12 rounded-full bg-white/95 flex items-center justify-center shadow-xl">
+                                <Play className="w-5 h-5 text-black ml-1" />
                               </div>
                             </a>
                           )}
                         </div>
-                        <CardContent className="p-6">
-                          <div className="flex items-start justify-between mb-3">
+                        <CardContent className="p-4">
+                          <div className="flex items-start justify-between mb-2">
                             <div>
                               <p className="text-xs text-muted-foreground mb-1">{event.month} {event.year}</p>
-                              <h3 className="text-xl font-bold text-foreground">{event.title}</h3>
+                              <h3 className="text-lg font-bold text-foreground">{event.title}</h3>
                             </div>
                             {event.source && (
-                              <span className="text-2xl">{event.source.logo}</span>
+                              <span className="text-xl">{event.source.logo}</span>
                             )}
                           </div>
-                          <h4 className="text-lg font-semibold text-primary mb-3">{event.headline}</h4>
-                          <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                          <h4 className="text-base font-semibold text-primary mb-2">{event.headline}</h4>
+                          <p className="text-muted-foreground text-sm leading-relaxed mb-3">
                             {event.longDescription || event.description}
                           </p>
                           {event.stats && (
-                            <div className="flex flex-wrap gap-4 mb-4">
+                            <div className="flex flex-wrap gap-3 mb-3">
                               {event.stats.map((stat, i) => (
                                 <div key={i} className="text-center">
-                                  <div className="text-lg font-bold text-foreground">{stat.value}</div>
+                                  <div className="text-base font-bold text-foreground">{stat.value}</div>
                                   <div className="text-xs text-muted-foreground">{stat.label}</div>
                                 </div>
                               ))}
                             </div>
                           )}
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2">
                             {event.source && (
-                              <Button variant="outline" size="sm" asChild className="h-9">
+                              <Button variant="outline" size="sm" asChild className="h-8 text-xs">
                                 <a href={event.source.url} target="_blank" rel="noopener noreferrer">
-                                  <ExternalLink className="w-3 h-3 mr-2" />
-                                  {event.source.name}
+                                  <ExternalLink className="w-3 h-3 mr-1" />
+                                  Source
                                 </a>
                               </Button>
                             )}
@@ -773,9 +773,9 @@ export default function Gallery() {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleShare(event)}
-                              className="h-9 text-muted-foreground hover:text-foreground"
+                              className="h-8 text-xs"
                             >
-                              <Share2 className="w-3 h-3 mr-2" />
+                              <Share2 className="w-3 h-3 mr-1" />
                               Share
                             </Button>
                           </div>
@@ -828,14 +828,14 @@ export default function Gallery() {
                           {event.year}
                         </Badge>
                       </div>
-                      <CardContent className="p-4">
+                      <CardContent className="p-3">
                         <p className="text-xs text-muted-foreground mb-1">{event.month} {event.year}</p>
-                        <h3 className="text-lg font-bold text-foreground mb-1">{event.title}</h3>
-                        <h4 className="text-base font-medium text-primary mb-2">{event.headline}</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed mb-3">{event.description}</p>
-                        <div className="flex items-center gap-2">
+                        <h3 className="text-base font-bold text-foreground mb-1">{event.title}</h3>
+                        <h4 className="text-sm font-medium text-primary mb-2">{event.headline}</h4>
+                        <p className="text-muted-foreground text-xs leading-relaxed mb-2">{event.description}</p>
+                        <div className="flex items-center gap-1">
                           {event.source && (
-                            <Button variant="outline" size="sm" asChild className="h-8 text-xs">
+                            <Button variant="outline" size="sm" asChild className="h-7 text-xs px-2">
                               <a href={event.source.url} target="_blank" rel="noopener noreferrer">
                                 <ExternalLink className="w-3 h-3 mr-1" />
                                 Source
@@ -846,7 +846,7 @@ export default function Gallery() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleShare(event)}
-                            className="h-8 text-xs"
+                            className="h-7 text-xs px-2"
                           >
                             <Share2 className="w-3 h-3 mr-1" />
                             Share
