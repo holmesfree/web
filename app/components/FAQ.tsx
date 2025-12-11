@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     question: "Why a free mint?",
-    answer: "Everyone deserves a second chance—including the chance to participate. 70% of the supply is available for free minting. No presale, no insiders, just a fair launch for all."
+    answer: "Everyone deserves a second chance—including the chance to participate. 90% of the supply is available for free minting. No presale, no insiders, just a fair launch for all."
   },
   {
     question: "What blockchain is HOLMES on?",
