@@ -182,7 +182,7 @@ export default function MintCoin() {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Mint effect particles */}
+      {/* Mint effect particles - Enhanced with sparkles */}
       {showMintEffect && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {Array.from({ length: 20 }).map((_, i) => (
@@ -197,6 +197,21 @@ export default function MintCoin() {
               }}
             />
           ))}
+          {/* Add sparkle stars for extra fun */}
+          {Array.from({ length: 10 }).map((_, i) => (
+            <div
+              key={`sparkle-${i}`}
+              className="absolute text-amber-300 animate-sparkle"
+              style={{
+                left: `${50 + (Math.random() - 0.5) * 60}%`,
+                top: `${50 + (Math.random() - 0.5) * 60}%`,
+                fontSize: `${12 + Math.random() * 8}px`,
+                animationDelay: `${Math.random() * 0.8}s`,
+              }}
+            >
+              ⭐
+            </div>
+          ))}
         </div>
       )}
 
@@ -204,7 +219,7 @@ export default function MintCoin() {
         onClick={handleCoinClick}
         className={`mx-auto relative perspective-1000 cursor-pointer transition-transform duration-150 ${
           clickCount > 0 ? 'scale-95' : 'scale-100'
-        } hover:scale-105 active:scale-95`}
+        } hover:scale-105 active:scale-95 group`}
         style={{
           perspectiveOrigin: 'center center',
           width: `${coinSize}px`,
@@ -212,6 +227,12 @@ export default function MintCoin() {
         }}
         onAnimationEnd={() => setClickCount(0)}
       >
+        {/* Fun tooltip on hover */}
+        <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <div className="bg-black/80 backdrop-blur-sm text-amber-400 text-sm px-3 py-2 rounded-full border border-amber-500/30">
+            🎡 Click to Spin & Mint!
+          </div>
+        </div>
         {/* Glow effect - stronger when hovering */}
         <div
           className="absolute inset-0 rounded-full blur-xl opacity-30 hover:opacity-50 transition-opacity"
@@ -347,7 +368,7 @@ export default function MintCoin() {
                   </defs>
                   <text fill="#78350f" fontSize="10" fontWeight="700" letterSpacing="0.08em">
                     <textPath href="#curve-bottom-front" startOffset="50%" textAnchor="middle">
-                      ★ CLICK TO MINT ★
+                      ★ SPIN TO MINT ★
                     </textPath>
                   </text>
                 </svg>
