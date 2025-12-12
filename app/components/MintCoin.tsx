@@ -312,7 +312,7 @@ export default function MintCoin() {
               }}
             >
               <div
-                className="absolute rounded-full bg-gradient-to-br from-amber-400 via-yellow-400 to-amber-500 overflow-hidden"
+                className="absolute rounded-full bg-gradient-to-br from-amber-400 via-yellow-400 to-amber-500"
                 style={{
                   top: '8px',
                   left: '8px',
