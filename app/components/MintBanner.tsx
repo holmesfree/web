@@ -46,6 +46,7 @@ export default function MintBanner() {
   const [displayCount, setDisplayCount] = useState(0);
   const [targetCount, setTargetCount] = useState(0);
   const [phase, setPhase] = useState<'initial' | 'live'>('initial');
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   const animationRef = useRef<number | null>(null);
   const startValueRef = useRef(0);
   const startTimeRef = useRef(0);
@@ -80,18 +81,41 @@ export default function MintBanner() {
     animationRef.current = requestAnimationFrame(animate);
   };
 
-  // Phase 1: Animate 0 -> 100M on mount
+  // Fetch initial data on mount
   useEffect(() => {
-    if (phase !== 'initial') return;
+    const fetchInitialData = async () => {
+      try {
+        const { fetchMinterCount } = await import('@/lib/api');
+        const minters = await fetchMinterCount();
+        const initialTarget = LP_ALLOCATION + (minters * TOKENS_PER_MINT);
+        
+        setTargetCount(initialTarget);
+        setInitialLoadComplete(true);
+      } catch (error) {
+        console.error('Error fetching initial mint count:', error);
+        // Fallback to LP allocation only
+        setTargetCount(LP_ALLOCATION);
+        setInitialLoadComplete(true);
+      }
+    };
 
-    animateTo(0, LP_ALLOCATION, 1500, () => {
-      setPhase('live');
-    });
+    fetchInitialData();
+  }, []);
+
+  // Phase 1: Animate 0 -> initial target on mount
+  useEffect(() => {
+    if (!initialLoadComplete || phase !== 'initial') return;
+
+    // Start live polling immediately
+    setPhase('live');
+    
+    // Animate from current display count to the initial target
+    animateTo(displayCount, targetCount, 1500);
 
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [phase]);
+  }, [phase, displayCount, targetCount, initialLoadComplete]);
 
   // Phase 2: Fetch live data with backoff polling
   useEffect(() => {
@@ -103,11 +127,13 @@ export default function MintBanner() {
         const minters = await fetchMinterCount();
         const totalTokens = LP_ALLOCATION + (minters * TOKENS_PER_MINT);
 
-        // Only update target if it's higher
+        // Always update target to the latest value
         setTargetCount(prev => {
-          if (totalTokens > prev) {
+          // Only animate if the new value is different from current
+          if (totalTokens !== prev) {
             // Reset backoff when we get new data
             pollIndexRef.current = 0;
+            console.log(`New mint count detected: ${minters} mints, ${totalTokens} total tokens`);
             return totalTokens;
           }
           // Increase backoff when no change
@@ -123,8 +149,9 @@ export default function MintBanner() {
       timeoutRef.current = setTimeout(fetchData, nextInterval);
     };
 
-    // Start polling
-    fetchData();
+    // Start polling with initial delay
+    const initialDelay = 1000; // Start polling 1 second after initial animation
+    timeoutRef.current = setTimeout(fetchData, initialDelay);
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -133,15 +160,16 @@ export default function MintBanner() {
 
   // Animate to new target when it changes
   useEffect(() => {
-    if (phase !== 'live' || targetCount <= displayCount) return;
+    if (phase !== 'live' || targetCount === displayCount) return;
 
     // Animate from current display to new target over 1.5s
+    // Always animate to the new target, even if it's lower (shouldn't happen, but handle gracefully)
     animateTo(displayCount, targetCount, 1500);
 
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [targetCount, phase]);
+  }, [targetCount, phase, displayCount]);
 
   useEffect(() => {
     setMounted(true);
