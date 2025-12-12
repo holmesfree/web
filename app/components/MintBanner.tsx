@@ -46,7 +46,6 @@ export default function MintBanner() {
   const [displayCount, setDisplayCount] = useState(0);
   const [targetCount, setTargetCount] = useState(0);
   const [phase, setPhase] = useState<'initial' | 'live'>('initial');
-  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   const animationRef = useRef<number | null>(null);
   const startValueRef = useRef(0);
   const startTimeRef = useRef(0);
@@ -81,7 +80,7 @@ export default function MintBanner() {
     animationRef.current = requestAnimationFrame(animate);
   };
 
-  // Fetch initial data on mount
+  // Fetch initial data on mount and start animation immediately
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
@@ -89,33 +88,21 @@ export default function MintBanner() {
         const minters = await fetchMinterCount();
         const initialTarget = LP_ALLOCATION + (minters * TOKENS_PER_MINT);
         
+        // Start animation immediately from 0 to initial target
+        setPhase('live');
+        animateTo(0, initialTarget, 2000); // Smoother 2s animation
         setTargetCount(initialTarget);
-        setInitialLoadComplete(true);
       } catch (error) {
         console.error('Error fetching initial mint count:', error);
         // Fallback to LP allocation only
+        setPhase('live');
+        animateTo(0, LP_ALLOCATION, 2000);
         setTargetCount(LP_ALLOCATION);
-        setInitialLoadComplete(true);
       }
     };
 
     fetchInitialData();
   }, []);
-
-  // Phase 1: Animate 0 -> initial target on mount
-  useEffect(() => {
-    if (!initialLoadComplete || phase !== 'initial') return;
-
-    // Start live polling immediately
-    setPhase('live');
-    
-    // Animate from current display count to the initial target
-    animateTo(displayCount, targetCount, 1500);
-
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
-  }, [phase, displayCount, targetCount, initialLoadComplete]);
 
   // Phase 2: Fetch live data with backoff polling
   useEffect(() => {

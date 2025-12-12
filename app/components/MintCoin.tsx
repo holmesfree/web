@@ -365,7 +365,7 @@ export default function MintCoin() {
                     </defs>
                     <text fill="#78350f" fontSize="10" fontWeight="700" letterSpacing="0.08em">
                       <textPath href="#curve-bottom-front" startOffset="50%" textAnchor="middle">
-                        ★ SPIN TO MINT ★
+                        ★ BRING HER HOME ★
                       </textPath>
                     </text>
                   </svg>
