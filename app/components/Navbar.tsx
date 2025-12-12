@@ -109,6 +109,32 @@ export default function Navbar() {
   ];
 
   const navTop = mounted && bannerVisible ? BANNER_HEIGHT : 0;
+  
+  // Live mint counter - syncs with banner
+  const [mintCount, setMintCount] = useState(0);
+  const [isLoadingCount, setIsLoadingCount] = useState(true);
+  
+  // Fetch mint count to keep navbar in sync with banner
+  useEffect(() => {
+    const fetchMintCount = async () => {
+      try {
+        const { fetchMinterCount } = await import('@/lib/api');
+        const count = await fetchMinterCount();
+        setMintCount(count);
+        setIsLoadingCount(false);
+      } catch (error) {
+        console.error('Error fetching mint count for navbar:', error);
+        setIsLoadingCount(false);
+      }
+    };
+    
+    fetchMintCount();
+    
+    // Poll every 15 seconds to stay in sync
+    const interval = setInterval(fetchMintCount, 15000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -122,9 +148,15 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
+            {/* Logo - Animated to match banner style */}
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-3xl font-black gradient-text">HOLMES</span>
+              <span className="text-3xl font-black gradient-text animate-shimmer-text bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 bg-[length:200%_100%] bg-clip-text text-transparent">
+                HOLMES
+              </span>
+              {/* FOMO Counter - Live sync with blockchain */}
+              <span className="ml-2 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full border border-green-500/30 animate-pulse">
+                🔥 {isLoadingCount ? 'Loading...' : `${mintCount.toLocaleString()} Minted`}
+              </span>
             </Link>
 
             {/* Desktop Nav */}
