@@ -453,8 +453,8 @@ export default function MintCoin() {
         </div>
       </div>
 
-      {/* Status text below coin */}
-      <div className="mt-6 text-center">
+      {/* Status text below coin - HIDDEN to simplify layout */}
+      {/* <div className="mt-6 text-center">
         <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium ${
           hasMinted || isSuccess
             ? 'bg-green-500/10 text-green-400 border border-green-500/20'
@@ -465,11 +465,12 @@ export default function MintCoin() {
           {getStatusIcon()}
           {getStatusText()}
         </div>
-      </div>
+      </div> */}
 
-      <p className="text-xs text-muted-foreground/50 mt-4">
+      {/* Photo credit - HIDDEN to simplify layout */}
+      {/* <p className="text-xs text-muted-foreground/50 mt-4">
         Photo: Max Morse/TechCrunch (CC BY 2.0)
-      </p>
+      </p> */}
     </div>
   );
 }
