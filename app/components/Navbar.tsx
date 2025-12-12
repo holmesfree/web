@@ -153,10 +153,10 @@ export default function Navbar() {
               <span className="text-3xl font-black gradient-text animate-shimmer-text bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 bg-[length:200%_100%] bg-clip-text text-transparent">
                 HOLMES
               </span>
-              {/* FOMO Counter - Live sync with blockchain */}
-              <span className="ml-2 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full border border-green-500/30 animate-pulse">
+              {/* FOMO Counter - HIDDEN to simplify layout */}
+              {/* <span className="ml-2 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full border border-green-500/30 animate-pulse">
                 🔥 {isLoadingCount ? 'Loading...' : `${mintCount.toLocaleString()} Minted`}
-              </span>
+              </span> */}
             </Link>
 
             {/* Desktop Nav */}
