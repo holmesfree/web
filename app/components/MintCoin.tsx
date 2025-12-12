@@ -329,17 +329,17 @@ export default function MintCoin() {
                     right: '12px',
                     bottom: '12px',
                     transformStyle: 'preserve-3d',
-                    clipPath: 'circle(50% at 50% 50%)',
+
                   }}
                 >
-                  <div className="w-full h-full rounded-full overflow-hidden" style={{ clipPath: 'circle(50% at 50% 50%)' }}>
+                  <div className="w-full h-full rounded-full overflow-hidden">
                     <Image
                       src="/elizabeth-holmes.jpg"
                       alt="Elizabeth Holmes"
                       width={200}
                       height={200}
                       className="w-full h-full object-cover"
-                      style={{ objectPosition: '50% 25%', transform: 'scale(0.85)', clipPath: 'circle(50% at 50% 50%)' }}
+                      style={{ objectPosition: '50% 25%', transform: 'scale(0.85)' }}
                       priority
                     />
                   </div>
