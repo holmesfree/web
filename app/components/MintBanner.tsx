@@ -80,7 +80,7 @@ export default function MintBanner() {
     animationRef.current = requestAnimationFrame(animate);
   };
 
-  // Fetch initial data on mount and start animation immediately
+  // Fetch initial data on mount and wait for it before animating
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
@@ -88,16 +88,23 @@ export default function MintBanner() {
         const minters = await fetchMinterCount();
         const initialTarget = LP_ALLOCATION + (minters * TOKENS_PER_MINT);
         
-        // Start animation immediately from 0 to initial target
-        setPhase('live');
-        animateTo(0, initialTarget, 2000); // Smoother 2s animation
+        // Set the target first, then animate from 0 to the REAL current value
         setTargetCount(initialTarget);
+        setPhase('live');
+        
+        // Only animate from 0 if we have a meaningful target (> LP allocation)
+        if (initialTarget > LP_ALLOCATION) {
+          animateTo(0, initialTarget, 2000); // Smooth 2s animation to REAL current value
+        } else {
+          // If no mints yet, just set to LP allocation without animation
+          setDisplayCount(LP_ALLOCATION);
+        }
       } catch (error) {
         console.error('Error fetching initial mint count:', error);
         // Fallback to LP allocation only
-        setPhase('live');
-        animateTo(0, LP_ALLOCATION, 2000);
         setTargetCount(LP_ALLOCATION);
+        setPhase('live');
+        setDisplayCount(LP_ALLOCATION);
       }
     };
 
@@ -114,17 +121,17 @@ export default function MintBanner() {
         const minters = await fetchMinterCount();
         const totalTokens = LP_ALLOCATION + (minters * TOKENS_PER_MINT);
 
-        // Always update target to the latest value
+        // Only update target if the new value is HIGHER (numbers only go up!)
         setTargetCount(prev => {
-          // Only animate if the new value is different from current
-          if (totalTokens !== prev) {
-            // Reset backoff when we get new data
+          if (totalTokens > prev) {
+            // Reset backoff when we get new data (new mints!)
             pollIndexRef.current = 0;
             console.log(`New mint count detected: ${minters} mints, ${totalTokens} total tokens`);
             return totalTokens;
           }
-          // Increase backoff when no change
+          // If no new mints, keep current target and increase backoff
           pollIndexRef.current = Math.min(pollIndexRef.current + 1, POLL_INTERVALS.length - 1);
+          console.log(`No new mints, keeping current target: ${prev} tokens`);
           return prev;
         });
       } catch (error) {
@@ -145,13 +152,18 @@ export default function MintBanner() {
     };
   }, [phase]);
 
-  // Animate to new target when it changes
+  // Animate to new target when it changes (ONLY if going UP!)
   useEffect(() => {
-    if (phase !== 'live' || targetCount === displayCount) return;
-
-    // Animate from current display to new target over 1.5s
-    // Always animate to the new target, even if it's lower (shouldn't happen, but handle gracefully)
-    animateTo(displayCount, targetCount, 1500);
+    if (phase !== 'live') return;
+    
+    // Only animate if new target is HIGHER than current display
+    if (targetCount > displayCount) {
+      console.log(`Animating up: ${displayCount} → ${targetCount}`);
+      animateTo(displayCount, targetCount, 1500);
+    } else if (targetCount < displayCount) {
+      console.log(`Prevented downward animation: ${displayCount} → ${targetCount} (ignored)`);
+    }
+    // If equal, do nothing
 
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
