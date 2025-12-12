@@ -219,7 +219,7 @@ export default function MintCoin() {
         onClick={handleCoinClick}
         className={`mx-auto relative perspective-1000 cursor-pointer transition-transform duration-150 ${
           clickCount > 0 ? 'scale-95' : 'scale-100'
-        } hover:scale-105 active:scale-95 group`}
+        } hover:scale-105 active:scale-95`}
         style={{
           perspectiveOrigin: 'center center',
           width: `${coinSize}px`,
@@ -227,12 +227,6 @@ export default function MintCoin() {
         }}
         onAnimationEnd={() => setClickCount(0)}
       >
-        {/* Fun tooltip on hover */}
-        <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <div className="bg-black/80 backdrop-blur-sm text-amber-400 text-sm px-3 py-2 rounded-full border border-amber-500/30">
-            🎡 Click to Spin & Mint!
-          </div>
-        </div>
         {/* Glow effect - stronger when hovering */}
         <div
           className="absolute inset-0 rounded-full blur-xl opacity-30 hover:opacity-50 transition-opacity"
