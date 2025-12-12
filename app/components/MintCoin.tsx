@@ -321,6 +321,7 @@ export default function MintCoin() {
                   transformStyle: 'preserve-3d',
                 }}
               >
+                {/* Image container with circular clipping */}
                 <div
                   className="absolute rounded-full overflow-hidden border border-amber-700/30"
                   style={{
@@ -345,27 +346,30 @@ export default function MintCoin() {
                   </div>
                 </div>
 
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 200 200">
-                  <defs>
-                    <path id="curve-top-front" d="M 20, 100 A 80,80 0 0,1 180,100" fill="none" />
-                  </defs>
-                  <text fill="#78350f" fontSize="11" fontWeight="700" letterSpacing="0.1em">
-                    <textPath href="#curve-top-front" startOffset="50%" textAnchor="middle">
-                      ELIZABETH HOLMES
-                    </textPath>
-                  </text>
-                </svg>
+                {/* Text elements - positioned outside the clipped container */}
+                <div className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 10 }}>
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
+                    <defs>
+                      <path id="curve-top-front" d="M 20, 100 A 80,80 0 0,1 180,100" fill="none" />
+                    </defs>
+                    <text fill="#78350f" fontSize="11" fontWeight="700" letterSpacing="0.1em">
+                      <textPath href="#curve-top-front" startOffset="50%" textAnchor="middle">
+                        ELIZABETH HOLMES
+                      </textPath>
+                    </text>
+                  </svg>
 
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 200 200">
-                  <defs>
-                    <path id="curve-bottom-front" d="M 180, 100 A 80,80 0 0,1 20,100" fill="none" />
-                  </defs>
-                  <text fill="#78350f" fontSize="10" fontWeight="700" letterSpacing="0.08em">
-                    <textPath href="#curve-bottom-front" startOffset="50%" textAnchor="middle">
-                      ★ SPIN TO MINT ★
-                    </textPath>
-                  </text>
-                </svg>
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
+                    <defs>
+                      <path id="curve-bottom-front" d="M 180, 100 A 80,80 0 0,1 20,100" fill="none" />
+                    </defs>
+                    <text fill="#78350f" fontSize="10" fontWeight="700" letterSpacing="0.08em">
+                      <textPath href="#curve-bottom-front" startOffset="50%" textAnchor="middle">
+                        ★ SPIN TO MINT ★
+                      </textPath>
+                    </text>
+                  </svg>
+                </div>
 
                 <div
                   className="absolute inset-0 rounded-full pointer-events-none animate-shimmer"
